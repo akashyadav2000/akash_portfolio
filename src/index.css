@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Serif:ital,wght@0,100..900;1,100..900&display=swap");
+
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-montserrat);
+  box-sizing: border-box;
+}
+
+:root {
+  --font-montserrat: "montserrat", sans-serif;
+  --font-poppins: "Poppins", sans-serif;
+  --font-roboto-serif: "Roboto Serif", serif;
+}
+
+@layer utilities {
+  .font-montserrat {
+    font-family: var(--font-montserrat);
+  }
+  .font-poppins {
+    font-family: var(--font-poppins);
+  }
+  .font-roboto-serif {
+    font-family: var(--font-roboto-serif);
+  }
+}
+
+/* In your global.css */
