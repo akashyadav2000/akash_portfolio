@@ -5,7 +5,7 @@ import { MdPhone, MdLocationOn } from "react-icons/md";
 export const contactSectionTitle = "Contact";
 
 export const contactIntro = {
-  desktop: "Submit your contact information and any questions you have in mind and we will happily assist you.",
+  desktop: "Share your contact details and any questions you may have, and I’ll be happy to assist you.",
   mobile: "Submit your contact details and any questions you have.",
 };
 

@@ -16,7 +16,7 @@ const Navbar = () => {
 
   return (
     <nav className="bg-[#f7fcff] shadow-md sticky top-0 z-999 font-roboto-serif">
-      <div className="w-full px-8 flex justify-between items-center h-[57px]">
+      <div className="w-full px-8 flex justify-between items-center h-[55px]">
         {/* Logo */}
         <div className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="h-9 w-auto object-contain" />

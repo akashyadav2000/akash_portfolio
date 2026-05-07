@@ -3,7 +3,10 @@ import { heroImages, heroContent } from "../data/heroData";
 
 export default function Hero() {
   return (
-    <div className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden">
+    <section
+      id=""
+      className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
+    >
       {/* bg-gradient-to-br from-[#CCF2FF] to-gray-100  */}
 
       {/* Background Blur */}
@@ -19,7 +22,7 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="flex  flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[85%] min-h-screen lg:items-stretch items-center lg:justify-between justify-center relative">
+      <div className="flex  flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[85%] lg:items-stretch items-center lg:justify-between justify-center relative">
         {/* Left text */}
         <div className="flex flex-col justify-center">
           <div className="flex items-center">
@@ -72,6 +75,6 @@ export default function Hero() {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

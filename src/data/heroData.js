@@ -46,7 +46,7 @@ export const heroImages = [
   {
     src: mobile2_icon,
     className:
-      "absolute w-[auto] 2xl:h-[150px] xl:h-[138px] lg:h-[130px] h-[126px] bottom-[3%] right-[27%] xl:right-[27%] 2xl:right-[28%] opacity-[50%] object-contain bg-[#ffd0b4] border-none rounded-[15px] p-2",
+      "absolute w-[auto] 2xl:h-[140px] xl:h-[138px] lg:h-[130px] h-[126px] bottom-[3%] right-[27%] xl:right-[27%] 2xl:right-[28%] opacity-[50%] object-contain bg-[#ffd0b4] border-none rounded-[15px] p-2",
   },
 ];
 

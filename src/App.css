@@ -11,7 +11,7 @@
 
 .react-tel-input .selected-flag {
   width: 48px !important;
-  padding: 0px 0px 0 9px !important;
+  padding: 0px 0px 0 13px !important;
 }
 
 @media (max-width: 780px) {
@@ -30,7 +30,7 @@
 }
 
 .react-tel-input .selected-flag .flag {
-  scale: 1.4;
+  scale: 118%;
 }
 
 .react-tel-input .selected-flag {

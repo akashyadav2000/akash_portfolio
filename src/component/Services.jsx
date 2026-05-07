@@ -36,7 +36,7 @@ export default function Services() {
 
   return (
     <section
-      className="relative min-h-fit xl:min-h-[calc(100dvh-55px)]  2xl:py-8 xl:py-6 py-4 text-center flex items-center justify-center px-[5%] 2xl:px-[9%]"
+      className="relative min-h-fit xl:min-h-[calc(100dvh-55px)]  2xl:py-8 xl:py-6 py-4 text-center flex items-center justify-center px-[5%] 2xl:px-[11%]"
       id="services"
     >
       {/* Background Blur */}
@@ -47,7 +47,7 @@ export default function Services() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full flex items-center justify-center flex-col">
-        <h2 className="2xl:text-[38px] xl:text-[33px] text-[30px] font-[600] text-gray-800 2xl:mt-[1%] xl:mt-[2%] 2xl:mb-[5%]  xl:mb-[4.5%] my-[4%] leading-0">
+        <h2 className="2xl:text-[34px] xl:text-[32px] text-[30px] font-[600] text-gray-800 2xl:mt-[1%] xl:mt-[2%] 2xl:mb-[5%]  xl:mb-[4.5%] my-[4%] leading-0">
           My <span className="text-pink-500">Expertise</span>
         </h2>
 
@@ -59,20 +59,20 @@ export default function Services() {
               <div
                 key={index}
                 whileHover={{ scale: 1.05 }}
-                className={`rounded-2xl 2xl:p-5 p-4 bg-gradient-to-tl ${service.bgGradient}  flex flex-col items-center text-center  shadow-md shadow-gray-400 hover:shadow-lg hover:shadow-gray-500 border-1 border-gray-300 transition-shadow duration-300`}
+                className={`rounded-2xl 2xl:p-3 p-3 bg-gradient-to-tl ${service.bgGradient}  flex flex-col items-center text-center  shadow-md shadow-gray-400 hover:shadow-lg hover:shadow-gray-500 border-1 border-gray-300 transition-shadow duration-300`}
               >
-                <div className="2xl:w-13 2xl:h-13 w-12 h-12 rounded-full p-3 flex items-center justify-center mb-4 bg-white shadow-md">
-                  <Icon className={`text-3xl ${service.iconColor}`} />
+                <div className="2xl:w-11 2xl:h-11 w-10 h-10 rounded-full p-3 flex items-center justify-center mb-3 bg-white shadow-md">
+                  <Icon className={`text-2xl ${service.iconColor}`} />
                 </div>
-                <h3 className="2xl:text-[21px] xl:text-[21px] text-[20px] font-[600] text-black mb-2">
+                <h3 className="2xl:text-[18px] xl:text-[18px] text-[17px] font-[600] text-black mb-2">
                   {service.title}
                 </h3>
-                <p className="2xl:text-[17px] xl:text-[16.5px] text-[16px] text-gray-700 font-[500] 2xl:leading-normal leading-snug 2xl:mb-6 xl:mb-3">
+                <p className="2xl:text-[15px] xl:text-[15px] text-[14.5px] text-gray-700 font-[500] 2xl:leading-normal leading-snug 2xl:mb-4 xl:mb-3">
                   {service.desc}
                 </p>
                 <button
                   onClick={() => openModal(service)}
-                  className={`2xl:text-[16px] xl:text-[15.5px] text-[15px] bg-white border px-4 py-[6px] 2xl:mb-[4px] mb-[2px] rounded transition font-[500] cursor-pointer ${service.textColor}`}
+                  className={`2xl:text-[13px] xl:text-[13.5px] text-[13px] bg-white border px-4 py-[6px] 2xl:mb-[4px] mb-[2px] rounded transition font-[500] cursor-pointer ${service.textColor}`}
                 >
                   Read More
                 </button>
@@ -82,7 +82,7 @@ export default function Services() {
         </div>
 
         {/* Certifications Carousel */}
-        <div className="2xl:mt-18 mt-12" id="certifications">
+        <div className="2xl:mt-13 mt-12" id="certifications">
           <div className="relative flex items-center justify-center">
             <div className="grid md:grid-cols-4 2xl:gap-10 gap-8 transition-all duration-500">
               {getVisibleCerts().map((cert, index) => {
@@ -90,25 +90,25 @@ export default function Services() {
                 return (
                   <div
                     key={index}
-                    className={`bg-gradient-to-br ${cert.bgGradient} rounded-2xl 2xl:p-5 p-4 flex flex-col items-center justify-center text-center hover:scale-[1.02] shadow-md shadow-gray-400 hover:shadow-lg hover:shadow-gray-500 border-1 border-gray-300 transition-shadow duration-300`}
+                    className={`bg-gradient-to-br ${cert.bgGradient} rounded-2xl 2xl:p-3 p-4 flex flex-col items-center justify-center text-center hover:scale-[1.02] shadow-md shadow-gray-400 hover:shadow-lg hover:shadow-gray-500 border-1 border-gray-300 transition-shadow duration-300`}
                   >
-                    <div className="mb-4 bg-white rounded-full 2xl:w-13 2xl:h-13 w-12 h-12 p-3 flex items-center justify-center shadow-[0px_0px_15px_rgba(0,0,0,0.15)]">
-                      <Icon className={`text-3xl ${cert.iconColor}`} />
+                    <div className="mb-4 bg-white rounded-full 2xl:w-11 2xl:h-11 w-10 h-10 p-3 flex items-center justify-center shadow-[0px_0px_15px_rgba(0,0,0,0.15)]">
+                      <Icon className={`text-2xl ${cert.iconColor}`} />
                     </div>
-                    <h3 className="2xl:text-[22px] xl:text-[21px] text-[20px] font-[600] text-black">
+                    <h3 className="2xl:text-[18px] xl:text-[21px] text-[20px] font-[600] text-black">
                       {cert.title}
                     </h3>
-                    <h3 className="2xl:text-[20px] xl:text-[19.5px] text-[19px] font-semibold text-gray-800 mb-2">
+                    <h3 className="2xl:text-[16px] xl:text-[19.5px] text-[19px] font-semibold text-gray-800 mb-2">
                       {cert.from}
                     </h3>
-                    <p className="2xl:text-[17px] xl:text-[16.5px] text-[16px] text-gray-700 font-[500] 2xl:mb-6 xl:mb-3 2xl:leading-normal leading-snug">
+                    <p className="2xl:text-[15px] xl:text-[16.5px] text-[16px] text-gray-700 font-[500] 2xl:mb-4 xl:mb-3 2xl:leading-normal leading-snug">
                       {cert.desc}
                     </p>
                     <a
                       href={cert.pdf}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`2xl:text-[16px] xl:text-[15.5px] text-[15px] bg-white border px-4 py-[6px] 2xl:mb-[4px] mb-[2px] rounded transition font-[500] ${cert.textColor} border-current`}
+                      className={`2xl:text-[13px] xl:text-[15.5px] text-[15px] bg-white border px-4 py-[6px] 2xl:mb-[4px] mb-[2px] rounded transition font-[500] ${cert.textColor} border-current`}
                     >
                       See Certificate
                     </a>
@@ -120,16 +120,16 @@ export default function Services() {
             {/* Arrows */}
             <button
               onClick={handlePrev}
-              className="absolute left-2 top-[47%] -translate-y-1/2 border-[#ffb347] bg-white 2xl:p-[10px] p-[9px] rounded-full z-10 transition"
+              className="absolute left-2 top-[47%] -translate-y-1/2 border-[#ffb347] bg-white 2xl:p-[8px] p-[9px] rounded-full z-10 transition"
             >
-              <FaChevronLeft className="2xl:text-[21px] xl:text-[20.5px] text-[20px] text-[#ff4f00]" />
+              <FaChevronLeft className="2xl:text-[19px] xl:text-[20.5px] text-[20px] text-[#ff4f00]" />
             </button>
 
             <button
               onClick={handleNext}
               className="absolute right-2 top-[47%] -translate-y-1/2 border-[#ffb347] bg-white 2xl:p-[10px] p-[9px] rounded-full z-10 transition"
             >
-              <FaChevronRight className="2xl:text-[21px] xl:text-[20.5px] text-[20px] text-[#ff4f00]" />
+              <FaChevronRight className="2xl:text-[19px] xl:text-[20.5px] text-[20px] text-[#ff4f00]" />
             </button>
           </div>
         </div>
