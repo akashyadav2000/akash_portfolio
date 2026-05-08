@@ -3,7 +3,10 @@ import { profileImage, aboutStats, aboutText } from "../data/aboutData";
 
 const AboutMe = () => {
   return (
-    <section className="relative min-h-fit xl:min-h-[calc(100dvh-55px)] px-[11%] flex items-center justify-center flex-col">
+    <section
+      id="about"
+      className="relative min-h-fit xl:min-h-[calc(100dvh-55px)] px-[11%] flex items-center justify-center flex-col"
+    >
       <h2 className="2xl:text-[34px] xl:text-[38px] text-[30px] font-[600] text-gray-800 2xl:mt-[1%] xl:mt-[2%] 2xl:mb-[5%]  xl:mb-[5%] my-[4%] leading-0">
         About <span className="text-pink-500">Me</span>
       </h2>

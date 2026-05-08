@@ -4,7 +4,7 @@ import { heroImages, heroContent } from "../data/heroData";
 export default function Hero() {
   return (
     <section
-      id=""
+      id="home"
       className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
     >
       {/* bg-gradient-to-br from-[#CCF2FF] to-gray-100  */}
