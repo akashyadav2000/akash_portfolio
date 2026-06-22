@@ -1,77 +1,270 @@
-// Hero.jsx
+// // Hero.jsx
+// import { heroImages, heroContent } from "../data/heroData";
+
+// export default function Hero() {
+//   return (
+//     <section
+//       id="home"
+//       className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
+//     >
+//       {/* bg-gradient-to-br from-[#CCF2FF] to-gray-100  */}
+
+//       {/* Background Blur */}
+//       <div className="absolute inset-0 -z-10">
+//         <div className="w-full h-full inset-0 z-0 bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
+//       </div>
+
+//       {/* Floating Icons ffddff*/}
+//       <div className="absolute inset-0 z-50 pointer-events-none">
+//         {heroImages.map((item, index) => (
+//           <img key={index} src={item.src} alt="" className={item.className} />
+//         ))}
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="flex  flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[85%] lg:items-stretch items-center lg:justify-between justify-center relative">
+//         {/* Left text */}
+//         <div className="flex flex-col justify-center">
+//           <div className="flex items-center">
+//             <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
+//             <span className="text-black 2xl:text-[35px] xl:text-[33px] text-[31px] font-[600] ml-[13px] leading-[1.7]">
+//               {heroContent.heading}
+//             </span>
+//           </div>
+
+//           <h1
+//             className={`2xl:text-[63px] xl:text-[58px] text-[55px] font-[600] leading-[1.5]`}
+//           >
+//             {heroContent.im}{" "}
+//             <span className=" bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
+//               {heroContent.firstname}{" "}
+//             </span>{" "}
+//             <span>{heroContent.lastname}</span>
+//           </h1>
+
+//           <h2
+//             className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent`}
+//           >
+//             {heroContent.title}
+//           </h2>
+//           {/*
+//           <h2 className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#bf00ff] to-[#ff00ff] bg-clip-text text-transparent`}>
+//             {heroContent.title}
+//           </h2> */}
+
+//           <p className="text-gray-800 2xl:text-[19px] xl:text-[18.5px] text-[18px] font-[500] max-w-lg leading-[1.5] my-4">
+//             {heroContent.description}
+//           </p>
+
+//           <div className="2xl:mt-6 xl:mt-[22px] mt-[20px] flex gap-4 flex-wrap">
+//             <button className="relative px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white">
+//               Hire Me
+//             </button>
+
+//             <button className="relative px-6 py-2 rounded-lg font-[500] text-[#ffffff] border border-[#ffffff] backdrop-blur-md overflow-hidden transition-all duration-300 bg-[#ff6dff] hover:bg-[#ffffff] hover:text-[#ff51ff] hover:border-[#ff51ff]">
+//               My Resume
+//             </button>
+//           </div>
+//         </div>
+
+//         {/* Right Image */}
+//         <div className="w-[40%] flex justify-center items-end">
+//           <img
+//             src={heroContent.profileImage}
+//             className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[400px]  rounded-full lg:rounded-none object-contain"
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
+// // Hero.jsx
+// import { heroImages, heroContent } from "../data/heroData";
+
+// // Utility: scroll to a section with navbar offset
+// const scrollToSection = (id) => {
+//   const el = document.getElementById(id);
+//   if (!el) return;
+//   window.scrollTo({
+//     top: el.getBoundingClientRect().top + window.scrollY - 55,
+//     behavior: "smooth",
+//   });
+// };
+
+// export default function Hero() {
+//   return (
+//     <section
+//       id="home"
+//       className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden py-10 lg:py-0"
+//     >
+//       {/* Background */}
+//       <div className="absolute inset-0 -z-10">
+//         <div className="w-full h-full bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
+//       </div>
+
+//       {/* Floating Icons — hidden on small laptops (lg) to prevent overflow, visible from xl */}
+//       <div className="absolute inset-0 z-50 pointer-events-none hidden xl:block">
+//         {heroImages.map((item, index) => (
+//           <img
+//             key={index}
+//             src={item.src}
+//             alt=""
+//             className={item.className}
+//             loading="lazy"
+//           />
+//         ))}
+//       </div>
+
+//       {/* Main Content */}
+//       <div className="flex flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[88%] lg:items-stretch items-center lg:justify-between justify-center relative z-10 gap-8 lg:gap-0">
+//         {/* Left — text */}
+//         <div className="flex flex-col justify-center">
+//           <div className="flex items-center">
+//             <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
+//             {/* FIXED: added lg: step between mobile and xl */}
+//             <span className="text-black 2xl:text-[35px] xl:text-[33px] lg:text-[29px] text-[27px] font-[600] ml-[13px] leading-[1.7]">
+//               {heroContent.heading}
+//             </span>
+//           </div>
+
+//           {/* FIXED: was jumping from text-[55px] straight to xl:text-[58px] — added lg: step */}
+//           <h1 className="2xl:text-[63px] xl:text-[58px] lg:text-[46px] text-[40px] font-[600] leading-[1.4]">
+//             {heroContent.im}{" "}
+//             <span className="bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
+//               {heroContent.firstname}{" "}
+//             </span>
+//             <span>{heroContent.lastname}</span>
+//           </h1>
+
+//           {/* FIXED: added lg: step for title */}
+//           <h2 className="2xl:text-[50px] xl:text-[47px] lg:text-[36px] text-[32px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent">
+//             {heroContent.title}
+//           </h2>
+
+//           {/* FIXED: added lg: step for description */}
+//           <p className="text-gray-800 2xl:text-[19px] xl:text-[18.5px] lg:text-[16px] text-[15px] font-[500] max-w-lg leading-[1.6] my-4">
+//             {heroContent.description}
+//           </p>
+
+//           <div className="2xl:mt-6 xl:mt-[22px] mt-[20px] flex gap-4 flex-wrap">
+//             {/* FIXED: wired Hire Me to scroll to #contact */}
+//             <button
+//               onClick={() => scrollToSection("contact")}
+//               className="relative px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white"
+//             >
+//               Hire Me
+//             </button>
+
+//             {/* FIXED: wired My Resume to open PDF — update the href to your actual resume URL */}
+//             <a
+//               href="/certificates/resume.pdf"
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="relative px-6 py-2 rounded-lg font-[500] text-[#ffffff] border border-[#ffffff] backdrop-blur-md overflow-hidden transition-all duration-300 bg-[#ff6dff] hover:bg-[#ffffff] hover:text-[#ff51ff] hover:border-[#ff51ff]"
+//             >
+//               My Resume
+//             </a>
+//           </div>
+//         </div>
+
+//         {/* Right — profile image */}
+//         {/* FIXED: was w-[40%] with no mobile sizing causing layout issues */}
+//         <div className="lg:w-[42%] w-[70%] sm:w-[55%] flex justify-center items-end">
+//           <img
+//             src={heroContent.profileImage}
+//             alt="Akash Yadav"
+//             className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[320px] rounded-full lg:rounded-none object-contain"
+//           />
+//         </div>
+//       </div>
+//     </section>
+//   );
+// }
+
 import { heroImages, heroContent } from "../data/heroData";
+
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  window.scrollTo({
+    top: el.getBoundingClientRect().top + window.scrollY - 55,
+    behavior: "smooth",
+  });
+};
 
 export default function Hero() {
   return (
     <section
       id="home"
-      className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
+      className="h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
     >
-      {/* bg-gradient-to-br from-[#CCF2FF] to-gray-100  */}
-
-      {/* Background Blur */}
       <div className="absolute inset-0 -z-10">
-        <div className="w-full h-full inset-0 z-0 bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
+        <div className="w-full h-full bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
       </div>
 
-      {/* Floating Icons ffddff*/}
-      <div className="absolute inset-0 z-50 pointer-events-none">
+      <div className="absolute inset-0 z-50 pointer-events-none hidden xl:block">
         {heroImages.map((item, index) => (
-          <img key={index} src={item.src} alt="" className={item.className} />
+          <img
+            key={index}
+            src={item.src}
+            alt=""
+            className={item.className}
+            loading="lazy"
+          />
         ))}
       </div>
 
-      {/* Main Content */}
-      <div className="flex  flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[85%] lg:items-stretch items-center lg:justify-between justify-center relative">
-        {/* Left text */}
+      <div className="flex flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] lg:w-[88%] w-[92%] lg:items-stretch items-center lg:justify-between justify-center relative z-10 lg:gap-0 lg:h-full">
+        {/* Left — text */}
         <div className="flex flex-col justify-center">
           <div className="flex items-center">
             <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
-            <span className="text-black 2xl:text-[35px] xl:text-[33px] text-[31px] font-[600] ml-[13px] leading-[1.7]">
+            <span className="text-black 2xl:text-[35px] xl:text-[33px] lg:text-[28px] md:text-[26px] text-[24px] font-[600] ml-[13px] leading-[1.7]">
               {heroContent.heading}
             </span>
           </div>
 
-          <h1
-            className={`2xl:text-[63px] xl:text-[58px] text-[55px] font-[600] leading-[1.5]`}
-          >
+          <h1 className="2xl:text-[63px] xl:text-[55px] lg:text-[44px] md:text-[38px] text-[34px] font-[600] leading-[1.4]">
             {heroContent.im}{" "}
-            <span className=" bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
               {heroContent.firstname}{" "}
-            </span>{" "}
+            </span>
             <span>{heroContent.lastname}</span>
           </h1>
 
-          <h2
-            className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent`}
-          >
+          <h2 className="2xl:text-[50px] xl:text-[44px] lg:text-[34px] md:text-[30px] text-[26px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent">
             {heroContent.title}
           </h2>
-          {/* 
-          <h2 className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#bf00ff] to-[#ff00ff] bg-clip-text text-transparent`}>
-            {heroContent.title}
-          </h2> */}
 
-          <p className="text-gray-800 2xl:text-[19px] xl:text-[18.5px] text-[18px] font-[500] max-w-lg leading-[1.5] my-4">
+          <p className="text-gray-800 2xl:text-[19px] xl:text-[17px] lg:text-[15px] md:text-[15px] text-[14px] font-[500] max-w-lg leading-[1.6] my-4">
             {heroContent.description}
           </p>
 
-          <div className="2xl:mt-6 xl:mt-[22px] mt-[20px] flex gap-4 flex-wrap">
-            <button className="relative px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white">
+          <div className="flex gap-4 flex-wrap mt-2">
+            <button
+              onClick={() => scrollToSection("contact")}
+              className="px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white text-[14px] lg:text-[15px]"
+            >
               Hire Me
             </button>
-
-            <button className="relative px-6 py-2 rounded-lg font-[500] text-[#ffffff] border border-[#ffffff] backdrop-blur-md overflow-hidden transition-all duration-300 bg-[#ff6dff] hover:bg-[#ffffff] hover:text-[#ff51ff] hover:border-[#ff51ff]">
+            <a
+              href="/certificates/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-6 py-2 rounded-lg font-[500] text-white border border-white transition-all duration-300 bg-[#ff6dff] hover:bg-white hover:text-[#ff51ff] hover:border-[#ff51ff] text-[14px] lg:text-[15px]"
+            >
               My Resume
-            </button>
+            </a>
           </div>
         </div>
 
-        {/* Right Image */}
-        <div className="w-[40%] flex justify-center items-end">
+        {/* Right — profile image */}
+        <div className="lg:w-[42%] w-[55%] sm:w-[45%] flex justify-center items-end">
           <img
             src={heroContent.profileImage}
-            className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[400px]  rounded-full lg:rounded-none object-contain"
+            alt="Akash Yadav"
+            className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[260px] sm:h-[300px] rounded-full lg:rounded-none object-contain"
           />
         </div>
       </div>

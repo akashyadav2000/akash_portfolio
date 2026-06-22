@@ -1,4 +1,4 @@
-/* Add special styles to the active link */
+/* 
 .header-links li a.active::before {
   content: "";
   position: absolute;
@@ -36,6 +36,56 @@
 .react-tel-input .selected-flag {
   background-color: #ffffff;
   border: 1px solid #00c41d;
+}
+
+.react-tel-input .selected-flag .arrow {
+  left: 22px;
+}
+
+input,
+textarea {
+  border: 1px solid #00c41d;
+  border-radius: 6px;
+  font-weight: 500;
+} */
+
+/* Active nav link underline */
+.header-links li a.active::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -25%;
+  background-color: #ffb700;
+  width: 100%;
+  height: 2px;
+}
+
+@media (max-width: 780px) {
+  .header-links li a.active::before {
+    bottom: -70%;
+  }
+}
+
+/* Hire Me button arrow animation */
+.main-btn:hover .arrow {
+  display: block;
+  right: 0;
+}
+
+/* react-phone-input-2 overrides */
+.react-tel-input .flag-dropdown {
+  border: none !important;
+}
+
+.react-tel-input .selected-flag {
+  width: 48px !important;
+  padding: 0px 0px 0 13px !important;
+  background-color: #ffffff;
+  border: 1px solid #00c41d;
+}
+
+.react-tel-input .selected-flag .flag {
+  scale: 118%;
 }
 
 .react-tel-input .selected-flag .arrow {
