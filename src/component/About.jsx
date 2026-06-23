@@ -228,6 +228,157 @@
 
 // export default AboutMe;
 
+// import React from "react";
+// import { profileImage, aboutStats, aboutText } from "../data/aboutData";
+
+// const scrollToSection = (id) => {
+//   const el = document.getElementById(id);
+//   if (!el) return;
+//   window.scrollTo({
+//     top: el.getBoundingClientRect().top + window.scrollY - 55,
+//     behavior: "smooth",
+//   });
+// };
+
+// const AboutMe = () => {
+//   return (
+//     <section
+//       id="about"
+//       className="relative min-h-[calc(100dvh-55px)] px-[8%] md:px-[8%] lg:px-[10%] xl:px-[11%] flex items-center justify-center flex-col py-8 md:py-12 xl:py-0"
+//     >
+//       <div className="absolute inset-0 -z-10">
+//         <div className="w-full h-full bg-gradient-to-br from-[#8dfff7] via-[#fdf5e6c3] to-[#ffeddd99] opacity-50"></div>
+//       </div>
+
+//       <h2 className="w-full text-center 2xl:text-[34px] xl:text-[32px] lg:text-[29px] md:text-[26px] text-[24px] font-[600] text-gray-800 mb-6 xl:mb-[3%] leading-none flex-shrink-0">
+//         About <span className="text-pink-500">Me</span>
+//       </h2>
+
+//       <div className="w-full max-w-[1536px] flex flex-col md:flex-row md:items-center gap-12 md:gap-6 lg:gap-10 xl:gap-12 2xl:gap-16">
+//         {/* Image Side */}
+//         <div className="w-full md:w-[38%] lg:w-[36%] flex justify-center flex-shrink-0">
+//           <div className="relative w-[42%] sm:w-[38%] md:w-[85%] lg:w-[88%] xl:w-[86%] 2xl:w-[80%] mx-auto mt-6 md:mt-16 lg:mt-20 xl:mt-20">
+//             {/* Pink frame */}
+//             <div className="relative bg-gradient-to-b from-[#fba0e3] to-[#ff51ff] p-[9%] overflow-hidden">
+//               <div className="w-full h-full bg-white">
+//                 <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+//                   {/* Image: on mobile sits normally, on md+ pulls up to show full body */}
+//                   <img
+//                     src={profileImage}
+//                     alt="Akash Yadav"
+//                     className="w-[94%] object-cover object-top rounded-md
+//                       h-[180px] sm:h-[220px]
+//                       md:h-auto md:object-center md:-mt-20
+//                       lg:-mt-24 xl:-mt-28 2xl:-mt-32"
+//                     loading="lazy"
+//                   />
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Stat Cards */}
+//             {aboutStats.map((stat, i) => {
+//               let pos = "";
+//               if (stat.position === "top-left")
+//                 pos =
+//                   "-top-5 -left-[32%] md:-left-[24%] lg:-left-[26%] xl:-left-[28%]";
+//               else if (stat.position === "bottom-left")
+//                 pos =
+//                   "-bottom-5 -left-[32%] md:-left-[24%] lg:-left-[26%] xl:-left-[28%]";
+//               else if (stat.position === "bottom-right")
+//                 pos =
+//                   "-bottom-5 -right-[32%] md:-right-[24%] lg:-right-[26%] xl:-right-[28%]";
+
+//               return (
+//                 <div
+//                   key={i}
+//                   className={`absolute ${pos} bg-fuchsia-50/90 border border-cyan-200 shadow-lg rounded-xl text-center z-30 transition-all duration-300 hover:scale-105
+//                     px-[6px] py-[4px] sm:px-[8px] sm:py-[5px]
+//                     md:px-[10px] md:py-[6px] lg:px-[13px] lg:py-[8px]
+//                     xl:px-[16px] xl:py-[10px] 2xl:px-[22px] 2xl:py-[13px]`}
+//                 >
+//                   <p
+//                     className="font-semibold leading-snug
+//                       text-[10px] sm:text-[11px] md:text-[13px] lg:text-[14px] xl:text-[17px] 2xl:text-[18px]"
+//                     style={{ color: stat.color }}
+//                   >
+//                     {stat.value}
+//                   </p>
+//                   <p
+//                     className="font-[500] leading-snug whitespace-nowrap text-gray-700
+//                     text-[8px] sm:text-[9px] md:text-[10px] lg:text-[11px] xl:text-[13px] 2xl:text-[14px]"
+//                   >
+//                     {stat.label}
+//                   </p>
+//                 </div>
+//               );
+//             })}
+//           </div>
+//         </div>
+
+//         {/* Text Side */}
+//         <div className="w-full md:w-[62%] lg:w-[64%] text-justify mt-6 md:mt-0">
+//           <p
+//             className="text-gray-700 font-medium leading-relaxed mb-3
+//             text-[13px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[18px] 2xl:text-[17px]"
+//           >
+//             {aboutText.intro}
+//           </p>
+
+//           <div className="my-3 xl:my-4 h-[1px] bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent"></div>
+
+//           <h4
+//             className="font-semibold text-[#032255] mb-2
+//             text-[14px] sm:text-[15px] md:text-[15px] lg:text-[17px] xl:text-[22px] 2xl:text-[22px]"
+//           >
+//             {aboutText.freelanceTitle}
+//           </h4>
+//           <p
+//             className="text-gray-700 font-medium leading-relaxed mb-3
+//             text-[13px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[18px] 2xl:text-[17px]"
+//           >
+//             {aboutText.freelanceDescription}
+//           </p>
+
+//           <div className="my-3 xl:my-4 h-[1px] bg-gradient-to-r from-transparent via-[#00f0ff] to-transparent"></div>
+
+//           <h4
+//             className="font-semibold text-[#032255] mb-2
+//             text-[14px] sm:text-[15px] md:text-[15px] lg:text-[17px] xl:text-[22px] 2xl:text-[22px]"
+//           >
+//             Lionbridge Pvt Ltd
+//           </h4>
+//           <p
+//             className="text-gray-700 font-medium leading-relaxed mb-5
+//             text-[13px] sm:text-[14px] md:text-[14px] lg:text-[15px] xl:text-[18px] 2xl:text-[17px]"
+//           >
+//             {aboutText.summary}
+//           </p>
+
+//           <div className="flex gap-4 flex-wrap">
+//             <button
+//               onClick={() => scrollToSection("contact")}
+//               className="px-5 py-2 rounded-lg font-[500] bg-[#2ef6e9] border border-white transition-all duration-300 hover:bg-white hover:text-[#0fc0fc] hover:border-[#0fc0fc] text-[13px] sm:text-[14px]"
+//             >
+//               Hire Me
+//             </button>
+//             <a
+//               href="/certificates/resume.pdf"
+//               target="_blank"
+//               rel="noopener noreferrer"
+//               className="px-5 py-2 rounded-lg font-[500] bg-white text-[#ff51ff] border border-[#ff51ff] transition-all duration-300 hover:bg-[#ff6dff] hover:text-white hover:border-white text-[13px] sm:text-[14px]"
+//             >
+//               My Resume
+//             </a>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default AboutMe;
+
 import React from "react";
 import { profileImage, aboutStats, aboutText } from "../data/aboutData";
 
@@ -244,32 +395,40 @@ const AboutMe = () => {
   return (
     <section
       id="about"
-      className="relative min-h-[calc(100dvh-55px)] px-[8%] md:px-[8%] lg:px-[10%] xl:px-[11%] flex items-center justify-center flex-col py-10 md:py-12 xl:py-0"
+      className="relative min-h-[calc(100dvh-55px)] px-[8%] md:px-[8%] lg:px-[10%] xl:px-[11%] flex items-center justify-center flex-col py-8 md:py-12 xl:py-0"
     >
       <div className="absolute inset-0 -z-10">
         <div className="w-full h-full bg-gradient-to-br from-[#8dfff7] via-[#fdf5e6c3] to-[#ffeddd99] opacity-50"></div>
       </div>
 
-      <h2 className="w-full text-center 2xl:text-[34px] xl:text-[32px] lg:text-[29px] md:text-[26px] text-[24px] font-[600] text-gray-800 mb-6 md:mb-8 xl:mb-[3%] 2xl:mb-[4%] leading-none flex-shrink-0">
+      <h2 className="w-full text-center 2xl:text-[34px] xl:text-[32px] lg:text-[29px] md:text-[26px] text-[24px] font-[600] text-gray-800 mb-6 xl:mb-[3%] leading-none flex-shrink-0">
         About <span className="text-pink-500">Me</span>
       </h2>
 
       <div className="w-full max-w-[1536px] flex flex-col md:flex-row md:items-center gap-12 md:gap-6 lg:gap-10 xl:gap-12 2xl:gap-16">
         {/* Image Side */}
         <div className="w-full md:w-[38%] lg:w-[36%] flex justify-center flex-shrink-0">
-          <div className="relative w-[42%] sm:w-[38%] md:w-[85%] lg:w-[88%] xl:w-[86%] 2xl:w-[80%] mx-auto mt-6 md:mt-16 lg:mt-20 xl:mt-20">
+          <div
+            className="relative
+            w-[42%] sm:w-[38%]
+            md:w-[80%] lg:w-[82%] xl:w-[80%] 2xl:w-[75%]
+            mx-auto
+            mt-6
+            md:mt-20 lg:mt-24 xl:mt-24 2xl:mt-20
+            mb-0
+            md:mb-8 lg:mb-8 xl:mb-8"
+          >
             {/* Pink frame */}
-            <div className="relative bg-gradient-to-b from-[#fba0e3] to-[#ff51ff] p-[9%] overflow-hidden">
+            <div className="relative bg-gradient-to-b from-[#fba0e3] to-[#ff51ff] p-[9%]">
               <div className="w-full h-full bg-white">
-                <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                  {/* Image: on mobile sits normally, on md+ pulls up to show full body */}
+                <div className="w-full h-full bg-gray-200 flex items-end justify-center overflow-visible">
                   <img
                     src={profileImage}
                     alt="Akash Yadav"
                     className="w-[94%] object-cover object-top rounded-md
                       h-[180px] sm:h-[220px]
-                      md:h-auto md:object-center md:-mt-20
-                      lg:-mt-24 xl:-mt-28 2xl:-mt-32"
+                      md:h-auto md:-mt-32
+                      lg:-mt-40 xl:-mt-44 2xl:-mt-48"
                     loading="lazy"
                   />
                 </div>

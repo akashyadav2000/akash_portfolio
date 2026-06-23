@@ -212,7 +212,7 @@ export default function Skills() {
 
   return (
     <section
-      className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-12 xl:py-[2%]"
+      className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
       id="skills"
     >
       <div className="absolute inset-0 -z-10">

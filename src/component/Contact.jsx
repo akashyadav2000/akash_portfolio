@@ -492,14 +492,14 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="relative w-full min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center items-center px-[5%] sm:px-[6%] lg:px-[8%] xl:px-[11%] py-10 xl:py-6"
+      className="relative w-full min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center items-center px-[5%] sm:px-[6%] lg:px-[8%] xl:px-[11%] py-8 xl:py-6"
     >
       <div className="absolute inset-0 -z-10">
         <div className="w-full h-full bg-gradient-to-br from-[#ffeaf9] via-[#fff5ef] to-[#ffffff] opacity-40"></div>
       </div>
 
       <div className="w-full max-w-[1500px]">
-        <h2 className="2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold text-center text-gray-800 mb-5">
+        <h2 className="2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold text-center text-gray-800 mb-6 xl:mb-[3%]">
           {contactSectionTitle}
         </h2>
 

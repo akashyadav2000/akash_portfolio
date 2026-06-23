@@ -415,7 +415,7 @@ export default function Services() {
 
   return (
     <section
-      className="relative min-h-fit xl:min-h-[calc(100dvh-55px)] 2xl:py-8 xl:py-6 py-10 text-center flex items-center justify-center px-[5%] sm:px-[6%] lg:px-[8%] 2xl:px-[11%]"
+      className="relative min-h-fit xl:min-h-[calc(100dvh-55px)] 2xl:py-8 xl:py-6 py-8 text-center flex items-center justify-center px-[5%] sm:px-[6%] lg:px-[8%] 2xl:px-[11%]"
       id="services"
     >
       <div className="absolute inset-0 -z-10">
@@ -423,7 +423,7 @@ export default function Services() {
       </div>
 
       <div className="relative z-10 w-full flex items-center justify-center flex-col">
-        <h2 className="2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-[600] text-gray-800 2xl:mt-[1%] xl:mt-[2%] 2xl:mb-[5%] xl:mb-[4.5%] my-[4%] leading-none">
+        <h2 className="2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-[600] text-gray-800 mb-6 xl:mb-[3%] leading-none">
           My <span className="text-pink-500">Expertise</span>
         </h2>
 
