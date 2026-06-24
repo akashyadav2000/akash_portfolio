@@ -1,88 +1,5 @@
-// // Hero.jsx
 // import { heroImages, heroContent } from "../data/heroData";
 
-// export default function Hero() {
-//   return (
-//     <section
-//       id="home"
-//       className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
-//     >
-//       {/* bg-gradient-to-br from-[#CCF2FF] to-gray-100  */}
-
-//       {/* Background Blur */}
-//       <div className="absolute inset-0 -z-10">
-//         <div className="w-full h-full inset-0 z-0 bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
-//       </div>
-
-//       {/* Floating Icons ffddff*/}
-//       <div className="absolute inset-0 z-50 pointer-events-none">
-//         {heroImages.map((item, index) => (
-//           <img key={index} src={item.src} alt="" className={item.className} />
-//         ))}
-//       </div>
-
-//       {/* Main Content */}
-//       <div className="flex  flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[85%] lg:items-stretch items-center lg:justify-between justify-center relative">
-//         {/* Left text */}
-//         <div className="flex flex-col justify-center">
-//           <div className="flex items-center">
-//             <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
-//             <span className="text-black 2xl:text-[35px] xl:text-[33px] text-[31px] font-[600] ml-[13px] leading-[1.7]">
-//               {heroContent.heading}
-//             </span>
-//           </div>
-
-//           <h1
-//             className={`2xl:text-[63px] xl:text-[58px] text-[55px] font-[600] leading-[1.5]`}
-//           >
-//             {heroContent.im}{" "}
-//             <span className=" bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
-//               {heroContent.firstname}{" "}
-//             </span>{" "}
-//             <span>{heroContent.lastname}</span>
-//           </h1>
-
-//           <h2
-//             className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent`}
-//           >
-//             {heroContent.title}
-//           </h2>
-//           {/*
-//           <h2 className={`2xl:text-[50px] xl:text-[47px] text-[45px] font-[600] bg-gradient-to-r from-[#bf00ff] to-[#ff00ff] bg-clip-text text-transparent`}>
-//             {heroContent.title}
-//           </h2> */}
-
-//           <p className="text-gray-800 2xl:text-[19px] xl:text-[18.5px] text-[18px] font-[500] max-w-lg leading-[1.5] my-4">
-//             {heroContent.description}
-//           </p>
-
-//           <div className="2xl:mt-6 xl:mt-[22px] mt-[20px] flex gap-4 flex-wrap">
-//             <button className="relative px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white">
-//               Hire Me
-//             </button>
-
-//             <button className="relative px-6 py-2 rounded-lg font-[500] text-[#ffffff] border border-[#ffffff] backdrop-blur-md overflow-hidden transition-all duration-300 bg-[#ff6dff] hover:bg-[#ffffff] hover:text-[#ff51ff] hover:border-[#ff51ff]">
-//               My Resume
-//             </button>
-//           </div>
-//         </div>
-
-//         {/* Right Image */}
-//         <div className="w-[40%] flex justify-center items-end">
-//           <img
-//             src={heroContent.profileImage}
-//             className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[400px]  rounded-full lg:rounded-none object-contain"
-//           />
-//         </div>
-//       </div>
-//     </section>
-//   );
-// }
-
-// // Hero.jsx
-// import { heroImages, heroContent } from "../data/heroData";
-
-// // Utility: scroll to a section with navbar offset
 // const scrollToSection = (id) => {
 //   const el = document.getElementById(id);
 //   if (!el) return;
@@ -96,14 +13,12 @@
 //   return (
 //     <section
 //       id="home"
-//       className="h-fit xl:h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden py-10 lg:py-0"
+//       className="h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
 //     >
-//       {/* Background */}
 //       <div className="absolute inset-0 -z-10">
 //         <div className="w-full h-full bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
 //       </div>
 
-//       {/* Floating Icons — hidden on small laptops (lg) to prevent overflow, visible from xl */}
 //       <div className="absolute inset-0 z-50 pointer-events-none hidden xl:block">
 //         {heroImages.map((item, index) => (
 //           <img
@@ -116,20 +31,17 @@
 //         ))}
 //       </div>
 
-//       {/* Main Content */}
-//       <div className="flex flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] w-[88%] lg:items-stretch items-center lg:justify-between justify-center relative z-10 gap-8 lg:gap-0">
+//       <div className="flex flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] lg:w-[88%] w-[92%] lg:items-stretch items-center lg:justify-between justify-center relative z-10 lg:gap-0 lg:h-full">
 //         {/* Left — text */}
 //         <div className="flex flex-col justify-center">
 //           <div className="flex items-center">
 //             <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
-//             {/* FIXED: added lg: step between mobile and xl */}
-//             <span className="text-black 2xl:text-[35px] xl:text-[33px] lg:text-[29px] text-[27px] font-[600] ml-[13px] leading-[1.7]">
+//             <span className="text-black 2xl:text-[35px] xl:text-[33px] lg:text-[28px] md:text-[26px] text-[24px] font-[600] ml-[13px] leading-[1.7]">
 //               {heroContent.heading}
 //             </span>
 //           </div>
 
-//           {/* FIXED: was jumping from text-[55px] straight to xl:text-[58px] — added lg: step */}
-//           <h1 className="2xl:text-[63px] xl:text-[58px] lg:text-[46px] text-[40px] font-[600] leading-[1.4]">
+//           <h1 className="2xl:text-[63px] xl:text-[55px] lg:text-[44px] md:text-[38px] text-[34px] font-[600] leading-[1.4]">
 //             {heroContent.im}{" "}
 //             <span className="bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
 //               {heroContent.firstname}{" "}
@@ -137,31 +49,26 @@
 //             <span>{heroContent.lastname}</span>
 //           </h1>
 
-//           {/* FIXED: added lg: step for title */}
-//           <h2 className="2xl:text-[50px] xl:text-[47px] lg:text-[36px] text-[32px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent">
+//           <h2 className="2xl:text-[50px] xl:text-[44px] lg:text-[34px] md:text-[30px] text-[26px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent">
 //             {heroContent.title}
 //           </h2>
 
-//           {/* FIXED: added lg: step for description */}
-//           <p className="text-gray-800 2xl:text-[19px] xl:text-[18.5px] lg:text-[16px] text-[15px] font-[500] max-w-lg leading-[1.6] my-4">
+//           <p className="text-gray-800 2xl:text-[19px] xl:text-[17px] lg:text-[15px] md:text-[15px] text-[14px] font-[500] max-w-lg leading-[1.6] my-4">
 //             {heroContent.description}
 //           </p>
 
-//           <div className="2xl:mt-6 xl:mt-[22px] mt-[20px] flex gap-4 flex-wrap">
-//             {/* FIXED: wired Hire Me to scroll to #contact */}
+//           <div className="flex gap-4 flex-wrap mt-2">
 //             <button
 //               onClick={() => scrollToSection("contact")}
-//               className="relative px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] backdrop-blur-md overflow-hidden transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white"
+//               className="px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white text-[14px] lg:text-[15px]"
 //             >
 //               Hire Me
 //             </button>
-
-//             {/* FIXED: wired My Resume to open PDF — update the href to your actual resume URL */}
 //             <a
 //               href="/certificates/resume.pdf"
 //               target="_blank"
 //               rel="noopener noreferrer"
-//               className="relative px-6 py-2 rounded-lg font-[500] text-[#ffffff] border border-[#ffffff] backdrop-blur-md overflow-hidden transition-all duration-300 bg-[#ff6dff] hover:bg-[#ffffff] hover:text-[#ff51ff] hover:border-[#ff51ff]"
+//               className="px-6 py-2 rounded-lg font-[500] text-white border border-white transition-all duration-300 bg-[#ff6dff] hover:bg-white hover:text-[#ff51ff] hover:border-[#ff51ff] text-[14px] lg:text-[15px]"
 //             >
 //               My Resume
 //             </a>
@@ -169,12 +76,11 @@
 //         </div>
 
 //         {/* Right — profile image */}
-//         {/* FIXED: was w-[40%] with no mobile sizing causing layout issues */}
-//         <div className="lg:w-[42%] w-[70%] sm:w-[55%] flex justify-center items-end">
+//         <div className="lg:w-[42%] w-[55%] sm:w-[45%] flex justify-center items-end">
 //           <img
 //             src={heroContent.profileImage}
 //             alt="Akash Yadav"
-//             className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[320px] rounded-full lg:rounded-none object-contain"
+//             className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[260px] sm:h-[300px] rounded-full lg:rounded-none object-contain"
 //           />
 //         </div>
 //       </div>
@@ -182,7 +88,10 @@
 //   );
 // }
 
+import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { heroImages, heroContent } from "../data/heroData";
+import { useTheme } from "../context/ThemeContext";
 
 const scrollToSection = (id) => {
   const el = document.getElementById(id);
@@ -193,58 +102,125 @@ const scrollToSection = (id) => {
   });
 };
 
+const fadeLeft = {
+  hidden: { opacity: 0, x: -60 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.8, ease: "easeOut" } },
+};
+const fadeRight = {
+  hidden: { opacity: 0, x: 60 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.8, ease: "easeOut", delay: 0.2 },
+  },
+};
+const stagger = { show: { transition: { staggerChildren: 0.12 } } };
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+};
+
 export default function Hero() {
+  const { isDark } = useTheme();
+  const imgRef = useRef(null);
+
+  // 3D float animation for profile image
+  useEffect(() => {
+    const el = imgRef.current;
+    if (!el) return;
+    let t = 0;
+    const tick = () => {
+      t += 0.015;
+      el.style.transform = `translateY(${Math.sin(t) * 12}px)`;
+      requestAnimationFrame(tick);
+    };
+    const id = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <section
       id="home"
       className="h-[calc(100dvh-55px)] flex justify-center items-center relative overflow-hidden"
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="w-full h-full bg-gradient-to-br from-[#c8ffc4] via-[#aefcff] to-[#ffffff] opacity-50 pointer-events-none"></div>
-      </div>
-
-      <div className="absolute inset-0 z-50 pointer-events-none hidden xl:block">
-        {heroImages.map((item, index) => (
+      {/* Floating icons — xl only */}
+      <div className="absolute inset-0 z-20 pointer-events-none hidden xl:block">
+        {heroImages.map((item, i) => (
           <img
-            key={index}
+            key={i}
             src={item.src}
             alt=""
             className={item.className}
             loading="lazy"
+            style={{
+              filter: isDark ? "brightness(1.3) saturate(1.5)" : "none",
+            }}
           />
         ))}
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row 2xl:w-[75%] xl:w-[80%] lg:w-[88%] w-[92%] lg:items-stretch items-center lg:justify-between justify-center relative z-10 lg:gap-0 lg:h-full">
-        {/* Left — text */}
-        <div className="flex flex-col justify-center">
-          <div className="flex items-center">
-            <hr className="border-t-4 border-black 2xl:w-9 xl:w-8 w-7" />
-            <span className="text-black 2xl:text-[35px] xl:text-[33px] lg:text-[28px] md:text-[26px] text-[24px] font-[600] ml-[13px] leading-[1.7]">
+        {/* Left text — slides in from left */}
+        <motion.div
+          className="flex flex-col justify-center"
+          variants={stagger}
+          initial="hidden"
+          animate="show"
+        >
+          <motion.div variants={fadeUp} className="flex items-center">
+            <hr
+              className={`border-t-4 2xl:w-9 xl:w-8 w-7 ${isDark ? "border-cyan-400" : "border-black"}`}
+            />
+            <span
+              className={`2xl:text-[35px] xl:text-[33px] lg:text-[28px] text-[22px] font-[600] ml-[13px] leading-[1.7]
+              ${isDark ? "text-gray-200" : "text-black"}`}
+            >
               {heroContent.heading}
             </span>
-          </div>
+          </motion.div>
 
-          <h1 className="2xl:text-[63px] xl:text-[55px] lg:text-[44px] md:text-[38px] text-[34px] font-[600] leading-[1.4]">
-            {heroContent.im}{" "}
-            <span className="bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent">
+          <motion.h1
+            variants={fadeUp}
+            className="2xl:text-[63px] xl:text-[55px] lg:text-[44px] text-[30px] font-[600] leading-[1.3]"
+          >
+            <span className={isDark ? "text-gray-100" : "text-black"}>
+              {heroContent.im}{" "}
+            </span>
+            <span
+              className={`bg-gradient-to-r from-[#0fc0fc] to-[#00ffff] bg-clip-text text-transparent ${isDark ? "neon-text-cyan" : ""}`}
+            >
               {heroContent.firstname}{" "}
             </span>
-            <span>{heroContent.lastname}</span>
-          </h1>
+            <span className={isDark ? "text-gray-100" : "text-black"}>
+              {heroContent.lastname}
+            </span>
+          </motion.h1>
 
-          <h2 className="2xl:text-[50px] xl:text-[44px] lg:text-[34px] md:text-[30px] text-[26px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent">
+          <motion.h2
+            variants={fadeUp}
+            className={`2xl:text-[50px] xl:text-[44px] lg:text-[34px] text-[22px] font-[600] bg-gradient-to-r from-[#ff51ff] to-[#f899df] bg-clip-text text-transparent leading-[1.3]
+              ${isDark ? "neon-text-pink" : ""}`}
+          >
             {heroContent.title}
-          </h2>
+          </motion.h2>
 
-          <p className="text-gray-800 2xl:text-[19px] xl:text-[17px] lg:text-[15px] md:text-[15px] text-[14px] font-[500] max-w-lg leading-[1.6] my-4">
+          <motion.p
+            variants={fadeUp}
+            className={`2xl:text-[19px] xl:text-[17px] lg:text-[15px] text-[13px] font-[500] max-w-lg leading-[1.6] my-3
+              ${isDark ? "text-gray-300" : "text-gray-700"}`}
+          >
             {heroContent.description}
-          </p>
+          </motion.p>
 
-          <div className="flex gap-4 flex-wrap mt-2">
+          <motion.div variants={fadeUp} className="flex gap-4 flex-wrap">
             <button
               onClick={() => scrollToSection("contact")}
-              className="px-6 py-2 rounded-lg font-[500] bg-white text-[#0fc0fc] border border-[#0fc0fc] transition-all duration-300 hover:bg-[#2ef6e9] hover:text-gray-800 hover:border-white text-[14px] lg:text-[15px]"
+              className={`px-6 py-2 rounded-lg font-[600] text-[13px] lg:text-[15px] transition-all duration-300 border
+                ${
+                  isDark
+                    ? "bg-transparent text-cyan-400 border-cyan-400 hover:bg-cyan-400 hover:text-[#05050f] neon-cyan"
+                    : "bg-white text-cyan-500 border-cyan-400 hover:bg-cyan-400 hover:text-white"
+                }`}
             >
               Hire Me
             </button>
@@ -252,21 +228,37 @@ export default function Hero() {
               href="/certificates/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-2 rounded-lg font-[500] text-white border border-white transition-all duration-300 bg-[#ff6dff] hover:bg-white hover:text-[#ff51ff] hover:border-[#ff51ff] text-[14px] lg:text-[15px]"
+              className={`px-6 py-2 rounded-lg font-[600] text-[13px] lg:text-[15px] transition-all duration-300 border
+                ${
+                  isDark
+                    ? "bg-transparent text-[#ff51ff] border-[#ff51ff] hover:bg-[#ff51ff] hover:text-white neon-pink"
+                    : "bg-[#ff6dff] text-white border-transparent hover:bg-white hover:text-[#ff51ff] hover:border-[#ff51ff]"
+                }`}
             >
               My Resume
             </a>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
-        {/* Right — profile image */}
-        <div className="lg:w-[42%] w-[55%] sm:w-[45%] flex justify-center items-end">
+        {/* Right — floating profile image */}
+        <motion.div
+          variants={fadeRight}
+          initial="hidden"
+          animate="show"
+          className="lg:w-[42%] w-[50%] sm:w-[42%] flex justify-center items-end lg:h-full"
+        >
           <img
+            ref={imgRef}
             src={heroContent.profileImage}
             alt="Akash Yadav"
-            className="2xl:h-[85%] xl:h-[80%] lg:h-[75%] h-[260px] sm:h-[300px] rounded-full lg:rounded-none object-contain"
+            className="object-contain object-bottom h-[28vh] sm:h-[32vh] lg:h-full lg:w-full"
+            style={{
+              filter: isDark
+                ? "drop-shadow(0 0 30px rgba(0,240,252,0.3))"
+                : "none",
+            }}
           />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

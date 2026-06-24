@@ -1,145 +1,21 @@
-// import React from "react";
-// import { MdArrowForwardIos } from "react-icons/md";
+// import React, { useState } from "react";
+// import {
+//   MdArrowForwardIos,
+//   MdArrowDropDown,
+//   MdArrowDropUp,
+// } from "react-icons/md";
 // import { skills } from "../data/skillsData";
 
-// export default function Skills() {
-//   return (
-//     <section
-//       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] px-[7%] 2xl:py-[1%] xl:py-[1%] py-[2%]"
-//       id="skills"
-//     >
-//       {/* Background Blur */}
-//       <div className="absolute inset-0 -z-10">
-//         <div className="w-full h-full bg-gradient-to-br from-[#ffc5c5] via-[#ffbbed] to-[#cfcfcf] opacity-40"></div>
-//       </div>
-
-//       <h2 className="2xl:text-[34px] xl:text-[38px] text-[30px] font-semibold text-gray-800 2xl:mb-6 xl:mb-[3%] mb-4 text-center">
-//         My <span className="text-pink-500">Skills</span>
-//       </h2>
-
-//       <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-6">
-//         {skills.map((skill, index) => (
-//           <div
-//             key={index}
-//             className={`group flex items-center justify-between gap-4 bg-gradient-to-bl ${skill.bgGradient} px-4 2xl:py-[10px] xl:py-[9px] py-[10px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer`}
-//           >
-//             <div className="flex items-center gap-4">
-//               {/* Icon or Image */}
-//               <div>
-//                 {skill.isImage ? (
-//                   <img
-//                     src={skill.icon}
-//                     alt={skill.name}
-//                     className="2xl:w-[35px] 2xl:h-[35px] xl:w-[40px] xl:h-[40px] w-[38px] h-[38px]"
-//                   />
-//                 ) : (
-//                   <skill.icon
-//                     className={`2xl:w-[35px] 2xl:h-[35px] xl:w-[40px] xl:h-[40px] w-[38px] h-[38px] ${skill.iconColor}`}
-//                   />
-//                 )}
-//               </div>
-
-//               {/* Name and Description */}
-//               <div className="text-left">
-//                 <h4
-//                   className={`font-semibold 2xl:text-[15px] xl:text-[16.5px] text-[16px] ${skill.textColor}`}
-//                 >
-//                   {skill.name}
-//                 </h4>
-//                 <p
-//                   className={`text-gray-600 2xl:text-[14px] xl:text-[15.5px] text-[15px] font-medium`}
-//                 >
-//                   {skill.desc}
-//                 </p>
-//               </div>
-//             </div>
-
-//             {/* Arrow Icon */}
-//             <MdArrowForwardIos
-//               className={`2xl:text-[16px] xl:text-[17.5px] text-[17px] ${skill.textColor}`}
-//             />
-//           </div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-// import React from "react";
-// import { MdArrowForwardIos } from "react-icons/md";
-// import { skills } from "../data/skillsData";
+// // Split skills into two groups for mobile accordion
+// const CORE_SKILLS = skills.slice(0, 9);
+// const EXTRA_SKILLS = skills.slice(9);
 
 // export default function Skills() {
+//   const [showMore, setShowMore] = useState(false);
+
 //   return (
 //     <section
-//       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] 2xl:py-[1%] xl:py-[1%] py-10"
-//       id="skills"
-//     >
-//       {/* Background */}
-//       <div className="absolute inset-0 -z-10">
-//         <div className="w-full h-full bg-gradient-to-br from-[#ffc5c5] via-[#ffbbed] to-[#cfcfcf] opacity-40"></div>
-//       </div>
-
-//       <h2 className="2xl:text-[34px] xl:text-[38px] lg:text-[30px] text-[28px] font-semibold text-gray-800 2xl:mb-6 xl:mb-[3%] mb-4 text-center">
-//         My <span className="text-pink-500">Skills</span>
-//       </h2>
-
-//       <div className="grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4">
-//         {skills.map((skill, index) => (
-//           <div
-//             key={index}
-//             className={`group flex items-center justify-between gap-4 bg-gradient-to-bl ${skill.bgGradient} px-4 2xl:py-[10px] xl:py-[9px] py-[10px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer`}
-//           >
-//             <div className="flex items-center gap-4">
-//               {/* Icon or Image */}
-//               <div className="flex-shrink-0">
-//                 {skill.isImage ? (
-//                   <img
-//                     src={skill.icon}
-//                     alt={skill.name}
-//                     loading="lazy"
-//                     className="2xl:w-[35px] 2xl:h-[35px] xl:w-[38px] xl:h-[38px] w-[34px] h-[34px]"
-//                   />
-//                 ) : (
-//                   <skill.icon
-//                     className={`2xl:w-[35px] 2xl:h-[35px] xl:w-[38px] xl:h-[38px] w-[34px] h-[34px] ${skill.iconColor}`}
-//                     aria-hidden="true"
-//                   />
-//                 )}
-//               </div>
-
-//               {/* Name and Description */}
-//               <div className="text-left">
-//                 <h4
-//                   className={`font-semibold 2xl:text-[15px] xl:text-[15.5px] text-[14.5px] ${skill.textColor}`}
-//                 >
-//                   {skill.name}
-//                 </h4>
-//                 <p className="text-gray-600 2xl:text-[14px] xl:text-[14.5px] text-[13.5px] font-medium">
-//                   {skill.desc}
-//                 </p>
-//               </div>
-//             </div>
-
-//             <MdArrowForwardIos
-//               className={`2xl:text-[15px] xl:text-[16px] text-[15px] flex-shrink-0 ${skill.textColor}`}
-//               aria-hidden="true"
-//             />
-//           </div>
-//         ))}
-//       </div>
-//     </section>
-//   );
-// }
-
-// import React from "react";
-// import { MdArrowForwardIos } from "react-icons/md";
-// import { skills } from "../data/skillsData";
-
-// export default function Skills() {
-//   return (
-//     <section
-//       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-12 xl:py-[2%]"
+//       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
 //       id="skills"
 //     >
 //       <div className="absolute inset-0 -z-10">
@@ -150,105 +26,248 @@
 //         My <span className="text-pink-500">Skills</span>
 //       </h2>
 
-//       {/* 1 col mobile, 2 col md, 3 col lg+ */}
-//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4">
+//       {/* ── Desktop & Tablet: full grid (md+) ── */}
+//       <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4">
 //         {skills.map((skill, index) => (
-//           <div
-//             key={index}
-//             className={`group flex items-center justify-between gap-4 bg-gradient-to-bl ${skill.bgGradient} px-4 py-[10px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer`}
-//           >
-//             <div className="flex items-center gap-3 sm:gap-4">
-//               <div className="flex-shrink-0">
-//                 {skill.isImage ? (
-//                   <img
-//                     src={skill.icon}
-//                     alt={skill.name}
-//                     loading="lazy"
-//                     className="w-[32px] h-[32px] xl:w-[35px] xl:h-[35px]"
-//                   />
-//                 ) : (
-//                   <skill.icon
-//                     className={`w-[32px] h-[32px] xl:w-[35px] xl:h-[35px] ${skill.iconColor}`}
-//                     aria-hidden="true"
-//                   />
-//                 )}
-//               </div>
-//               <div className="text-left">
-//                 <h4
-//                   className={`font-semibold text-[14px] xl:text-[15px] ${skill.textColor}`}
-//                 >
-//                   {skill.name}
-//                 </h4>
-//                 <p className="text-gray-600 text-[13px] xl:text-[14px] font-medium">
-//                   {skill.desc}
-//                 </p>
-//               </div>
-//             </div>
-//             <MdArrowForwardIos
-//               className={`text-[14px] xl:text-[15px] flex-shrink-0 ${skill.textColor}`}
-//               aria-hidden="true"
-//             />
-//           </div>
+//           <SkillCard key={index} skill={skill} />
 //         ))}
+//       </div>
+
+//       {/* ── Mobile only: show first 9, collapse rest ── */}
+//       <div className="md:hidden flex flex-col gap-3">
+//         {CORE_SKILLS.map((skill, index) => (
+//           <SkillCard key={index} skill={skill} />
+//         ))}
+
+//         {/* Collapsible extra skills */}
+//         {showMore && (
+//           <div className="flex flex-col gap-3">
+//             {EXTRA_SKILLS.map((skill, index) => (
+//               <SkillCard key={index} skill={skill} />
+//             ))}
+//           </div>
+//         )}
+
+//         {/* Toggle button */}
+//         <button
+//           onClick={() => setShowMore((p) => !p)}
+//           className="mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-lg border border-pink-300 text-pink-500 font-semibold text-[14px] bg-white/70 hover:bg-pink-50 transition-colors duration-200"
+//         >
+//           {showMore ? (
+//             <>
+//               Show Less <MdArrowDropUp className="text-[20px]" />
+//             </>
+//           ) : (
+//             <>
+//               Show {EXTRA_SKILLS.length} More Skills{" "}
+//               <MdArrowDropDown className="text-[20px]" />
+//             </>
+//           )}
+//         </button>
 //       </div>
 //     </section>
 //   );
 // }
 
-import React, { useState } from "react";
+// function SkillCard({ skill }) {
+//   return (
+//     <div
+//       className={`group flex items-center justify-between gap-4 bg-gradient-to-bl ${skill.bgGradient} px-4 py-[9px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer`}
+//     >
+//       <div className="flex items-center gap-3">
+//         <div className="flex-shrink-0">
+//           {skill.isImage ? (
+//             <img
+//               src={skill.icon}
+//               alt={skill.name}
+//               loading="lazy"
+//               className="w-[30px] h-[30px] xl:w-[34px] xl:h-[34px]"
+//             />
+//           ) : (
+//             <skill.icon
+//               className={`w-[30px] h-[30px] xl:w-[34px] xl:h-[34px] ${skill.iconColor}`}
+//               aria-hidden="true"
+//             />
+//           )}
+//         </div>
+//         <div className="text-left">
+//           <h4
+//             className={`font-semibold text-[13px] xl:text-[15px] ${skill.textColor}`}
+//           >
+//             {skill.name}
+//           </h4>
+//           <p className="text-gray-600 text-[12px] xl:text-[14px] font-medium">
+//             {skill.desc}
+//           </p>
+//         </div>
+//       </div>
+//       <MdArrowForwardIos
+//         className={`text-[13px] xl:text-[15px] flex-shrink-0 ${skill.textColor}`}
+//         aria-hidden="true"
+//       />
+//     </div>
+//   );
+// }
+
+import React, { useState, useRef } from "react";
 import {
   MdArrowForwardIos,
   MdArrowDropDown,
   MdArrowDropUp,
 } from "react-icons/md";
+import { motion, useInView } from "framer-motion";
 import { skills } from "../data/skillsData";
+import { useTheme } from "../context/ThemeContext";
 
-// Split skills into two groups for mobile accordion
-const CORE_SKILLS = skills.slice(0, 9);
-const EXTRA_SKILLS = skills.slice(9);
+const CORE = skills.slice(0, 9);
+const EXTRAS = skills.slice(9);
+
+function SkillCard({ skill, i, inView, isDark }) {
+  const ref = useRef(null);
+  const handleMove = (e) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    el.style.transform = `perspective(400px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.04)`;
+  };
+  const handleLeave = () => {
+    if (ref.current)
+      ref.current.style.transform =
+        "perspective(400px) rotateY(0) rotateX(0) scale(1)";
+  };
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30, rotateX: 20 }}
+      animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+      transition={{ delay: i * 0.05, duration: 0.5, ease: "easeOut" }}
+    >
+      <div
+        ref={ref}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+        className={`tilt-card flex items-center justify-between gap-4 px-4 py-[9px] rounded-lg border transition-all duration-300
+          ${
+            isDark
+              ? "glass-card bg-white/5 border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(0,240,252,0.1)]"
+              : `bg-gradient-to-bl ${skill.bgGradient} border-gray-200/80 hover:shadow-md`
+          }`}
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex-shrink-0">
+            {skill.isImage ? (
+              <img
+                src={skill.icon}
+                alt={skill.name}
+                loading="lazy"
+                className="w-[30px] h-[30px] xl:w-[34px] xl:h-[34px]"
+              />
+            ) : (
+              <skill.icon
+                className={`w-[30px] h-[30px] xl:w-[34px] xl:h-[34px] ${skill.iconColor}`}
+                aria-hidden="true"
+              />
+            )}
+          </div>
+          <div className="text-left">
+            <h4
+              className={`font-semibold text-[13px] xl:text-[15px] ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-200") : skill.textColor}`}
+            >
+              {skill.name}
+            </h4>
+            <p
+              className={`text-[12px] xl:text-[14px] font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
+            >
+              {skill.desc}
+            </p>
+          </div>
+        </div>
+        <MdArrowForwardIos
+          className={`text-[13px] xl:text-[15px] flex-shrink-0 ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-400") : skill.textColor}`}
+          aria-hidden="true"
+        />
+      </div>
+    </motion.div>
+  );
+}
 
 export default function Skills() {
   const [showMore, setShowMore] = useState(false);
+  const { isDark } = useTheme();
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-80px" });
 
   return (
     <section
-      className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
       id="skills"
+      ref={ref}
+      className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
     >
-      <div className="absolute inset-0 -z-10">
-        <div className="w-full h-full bg-gradient-to-br from-[#ffc5c5] via-[#ffbbed] to-[#cfcfcf] opacity-40"></div>
-      </div>
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className={`2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold mb-6 xl:mb-[3%] text-center
+          ${isDark ? "text-white" : "text-gray-800"}`}
+      >
+        My{" "}
+        <span
+          className={isDark ? "text-pink-400 neon-text-pink" : "text-pink-500"}
+        >
+          Skills
+        </span>
+      </motion.h2>
 
-      <h2 className="2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold text-gray-800 mb-6 xl:mb-[3%] text-center">
-        My <span className="text-pink-500">Skills</span>
-      </h2>
-
-      {/* ── Desktop & Tablet: full grid (md+) ── */}
-      <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4">
-        {skills.map((skill, index) => (
-          <SkillCard key={index} skill={skill} />
+      {/* Desktop grid */}
+      <div
+        className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4"
+        style={{ perspective: "800px" }}
+      >
+        {skills.map((skill, i) => (
+          <SkillCard
+            key={i}
+            skill={skill}
+            i={i}
+            inView={inView}
+            isDark={isDark}
+          />
         ))}
       </div>
 
-      {/* ── Mobile only: show first 9, collapse rest ── */}
+      {/* Mobile accordion */}
       <div className="md:hidden flex flex-col gap-3">
-        {CORE_SKILLS.map((skill, index) => (
-          <SkillCard key={index} skill={skill} />
+        {CORE.map((skill, i) => (
+          <SkillCard
+            key={i}
+            skill={skill}
+            i={i}
+            inView={inView}
+            isDark={isDark}
+          />
         ))}
-
-        {/* Collapsible extra skills */}
         {showMore && (
           <div className="flex flex-col gap-3">
-            {EXTRA_SKILLS.map((skill, index) => (
-              <SkillCard key={index} skill={skill} />
+            {EXTRAS.map((skill, i) => (
+              <SkillCard
+                key={i}
+                skill={skill}
+                i={i + 9}
+                inView={inView}
+                isDark={isDark}
+              />
             ))}
           </div>
         )}
-
-        {/* Toggle button */}
         <button
           onClick={() => setShowMore((p) => !p)}
-          className="mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-lg border border-pink-300 text-pink-500 font-semibold text-[14px] bg-white/70 hover:bg-pink-50 transition-colors duration-200"
+          className={`mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-lg border font-semibold text-[14px] transition-colors duration-200
+            ${
+              isDark
+                ? "border-pink-400/50 text-pink-400 bg-transparent hover:bg-pink-400/10"
+                : "border-pink-300 text-pink-500 bg-white/70 hover:bg-pink-50"
+            }`}
         >
           {showMore ? (
             <>
@@ -256,52 +275,12 @@ export default function Skills() {
             </>
           ) : (
             <>
-              Show {EXTRA_SKILLS.length} More Skills{" "}
+              Show {EXTRAS.length} More Skills{" "}
               <MdArrowDropDown className="text-[20px]" />
             </>
           )}
         </button>
       </div>
     </section>
-  );
-}
-
-function SkillCard({ skill }) {
-  return (
-    <div
-      className={`group flex items-center justify-between gap-4 bg-gradient-to-bl ${skill.bgGradient} px-4 py-[9px] border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer`}
-    >
-      <div className="flex items-center gap-3">
-        <div className="flex-shrink-0">
-          {skill.isImage ? (
-            <img
-              src={skill.icon}
-              alt={skill.name}
-              loading="lazy"
-              className="w-[30px] h-[30px] xl:w-[34px] xl:h-[34px]"
-            />
-          ) : (
-            <skill.icon
-              className={`w-[30px] h-[30px] xl:w-[34px] xl:h-[34px] ${skill.iconColor}`}
-              aria-hidden="true"
-            />
-          )}
-        </div>
-        <div className="text-left">
-          <h4
-            className={`font-semibold text-[13px] xl:text-[15px] ${skill.textColor}`}
-          >
-            {skill.name}
-          </h4>
-          <p className="text-gray-600 text-[12px] xl:text-[14px] font-medium">
-            {skill.desc}
-          </p>
-        </div>
-      </div>
-      <MdArrowForwardIos
-        className={`text-[13px] xl:text-[15px] flex-shrink-0 ${skill.textColor}`}
-        aria-hidden="true"
-      />
-    </div>
   );
 }
