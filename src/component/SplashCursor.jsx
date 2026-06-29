@@ -3,6 +3,7 @@ import { useTheme } from "../context/ThemeContext";
 
 export default function SplashCursor() {
   const canvasRef = useRef(null);
+  const cursorRef = useRef(null); // CSS cursor ring — separate from WebGL canvas
   const { isDark } = useTheme();
   const isDarkRef = useRef(isDark);
   useEffect(() => {
@@ -14,6 +15,33 @@ export default function SplashCursor() {
     if (!canvas) return;
     let isActive = true;
 
+    // ── Hide native cursor + inject cursor animation keyframes ──
+    const styleEl = document.createElement("style");
+    styleEl.textContent = `
+      *, *::before, *::after { cursor: none !important; }
+      input, textarea { cursor: text !important; }
+
+      @keyframes cursor-chroma {
+        0%   { filter: hue-rotate(0deg)   saturate(1.6) brightness(1.2); }
+        100% { filter: hue-rotate(360deg) saturate(1.6) brightness(1.2); }
+      }
+      @keyframes cursor-pulse {
+        0%, 100% { box-shadow: 0 0 8px 2px rgba(0,229,255,0.55),
+                               0 0 20px 4px rgba(124,26,255,0.3); }
+        50%       { box-shadow: 0 0 14px 4px rgba(0,229,255,0.8),
+                               0 0 34px 8px rgba(255,20,147,0.45); }
+      }
+      .fluid-cursor {
+        background: conic-gradient(
+          #00e5ff, #7c1aff, #ff1493, #ffb700, #00e5ff
+        ) !important;
+        animation:
+          cursor-chroma 2.2s linear infinite,
+          cursor-pulse  1.9s ease-in-out infinite;
+      }
+    `;
+    document.head.appendChild(styleEl);
+
     const config = {
       SIM_RESOLUTION: 128,
       DYE_RESOLUTION: 1440,
@@ -22,7 +50,7 @@ export default function SplashCursor() {
       PRESSURE: 0.1,
       PRESSURE_ITERATIONS: 20,
       CURL: 10,
-      SPLAT_RADIUS: 0.14, // ← unchanged, perfect as-is
+      SPLAT_RADIUS: 0.126, // ← 10% smaller than 0.14
       SPLAT_FORCE: 3500,
       TRANSPARENT: true,
     };
@@ -174,7 +202,6 @@ export default function SplashCursor() {
     `,
     );
 
-    // ── Display shader — original, unchanged ─────────────────
     const displayShaderSrc = `
       precision highp float; precision highp sampler2D;
       varying vec2 vUv; varying vec2 vL; varying vec2 vR; varying vec2 vT; varying vec2 vB;
@@ -598,10 +625,28 @@ export default function SplashCursor() {
       p.color = color;
     }
 
-    // ── Splat ────────────────────────────────────────────────
+    // ── Splat (cursor trail — unchanged) ─────────────────────
     function splat(x, y, dx, dy, color) {
       const ar = canvas.width / canvas.height;
       const r = config.SPLAT_RADIUS / 100 / (ar > 1 ? ar : 1);
+      splatProg.bind();
+      gl.uniform1i(splatProg.uniforms.uTarget, velocity.read.attach(0));
+      gl.uniform1f(splatProg.uniforms.aspectRatio, ar);
+      gl.uniform2f(splatProg.uniforms.point, x, y);
+      gl.uniform3f(splatProg.uniforms.color, dx, dy, 0);
+      gl.uniform1f(splatProg.uniforms.radius, r);
+      blit(velocity.write);
+      velocity.swap();
+      gl.uniform1i(splatProg.uniforms.uTarget, dye.read.attach(0));
+      gl.uniform3f(splatProg.uniforms.color, color.r, color.g, color.b);
+      blit(dye.write);
+      dye.swap();
+    }
+
+    // ── splatR — splat with a custom radius (used by click burst only) ──
+    function splatR(x, y, dx, dy, color, radiusMult) {
+      const ar = canvas.width / canvas.height;
+      const r = (config.SPLAT_RADIUS * radiusMult) / 100 / (ar > 1 ? ar : 1);
       splatProg.bind();
       gl.uniform1i(splatProg.uniforms.uTarget, velocity.read.attach(0));
       gl.uniform1f(splatProg.uniforms.aspectRatio, ar);
@@ -630,28 +675,97 @@ export default function SplashCursor() {
     }
 
     // ══════════════════════════════════════════════════════════════════════
-    //  PREMIUM SCROLL EFFECT — "Aurora Bloom"
+    //  CLICK BURST — "Radial Starburst" (Linear / Vercel / Awwwards pattern)
     //
-    //  Inspired by Antigravity.google's landing page: a slow, breathing
-    //  prismatic aurora that expands and rotates when you scroll. The effect
-    //  uses 3 orbital force sources that rotate at different angular speeds
-    //  around screen center, creating a soft radial vortex — subtle when
-    //  idle, dramatic when you scroll fast.
+    //  The industry standard for fluid cursor click interaction is NOT
+    //  anything on hover. It is a single explosive burst on mousedown.
     //
-    //  Design principles (matching Antigravity's aesthetic):
-    //    • Low color count — 2 splats per scroll event, not 6+
-    //    • Slow, large-radius forces — creates aurora-like sweeping bloom
-    //    • Velocity-proportional: light scroll = shimmer, fast = full bloom
-    //    • Colors are the palette hues at ×0.15 intensity — ultra-subtle
-    //      wash, not a paint explosion. Exactly how Antigravity does it.
-    //    • Orbital placement: splats orbit from center outward, so the
-    //      bloom feels like it's emanating from the page core
+    //  Think of it as dropping a stone in water:
+    //    → 8 force vectors fire outward from the click point simultaneously
+    //    → Each arm is at 45° intervals (360°/8) with ±15° random jitter
+    //      so it feels organic, not mechanical or geometric
+    //    → Force: 7000 (2× the trail force) — intentionally dramatic
+    //    → Radius: 1.5× cursor — slightly wider than the trail but not huge
+    //    → Color: vivid from current palette at 2.5× boost — pops on click
+    //    → The 8 splats hit the fluid sim simultaneously → they collide,
+    //      interfere, and create complex swirling vortex patterns naturally
+    //
+    //  Used by: Linear.app, Vercel, Awwwards SOTD winners with fluid cursors.
+    //  The "stone in water" metaphor is exactly what users feel —
+    //  confirming their click with a physical, satisfying ripple.
     // ══════════════════════════════════════════════════════════════════════
-    let lastScrollY = window.scrollY;
-    let scrollPhase = 0; // rotates with each scroll event — orbital motion
-    let scrollMomentum = 0; // smoothed scroll velocity for easing
 
-    const SCROLL_ORBITAL_RADIUS = 0.22; // how far from center the bloom sources orbit
+    const BURST_ARMS = 8;
+    const BURST_FORCE = 5670; // ×0.9 of 6300
+    const BURST_RADIUS_MULT = 1.215; // ×0.9 of 1.35
+    const BURST_COLOR_BOOST = 2.025; // ×0.9 of 2.25
+    const JITTER_RAD = 0.26;
+    // NO_BURST_SELECTOR — clicks on these elements skip the burst
+    const NO_BURST_SELECTOR =
+      "a, button, [role='button'], input, select, textarea, label, summary";
+
+    // INTERACTIVE_SELECTOR — broader: catches nav links, any [href], tabindex,
+    // custom clickable divs etc. Used for the CSS cursor ring show/hide.
+    const INTERACTIVE_SELECTOR =
+      "a, button, [role='button'], [role='link'], [href], " +
+      "input, select, textarea, label, summary, details, " +
+      "[tabindex]:not([tabindex='-1']), [onclick], " +
+      "nav *, header *"; // catches navbar and header items
+
+    // Throttle: prevent burst accumulating on rapid/repeated clicks
+    let lastBurstTime = 0;
+    const BURST_COOLDOWN_MS = 350;
+
+    const onMouseDown = (e) => {
+      // Skip burst on interactive elements — those clicks stay clean
+      if (e.target.closest(NO_BURST_SELECTOR)) return;
+
+      // Throttle: ignore click if the last burst was < 350ms ago
+      const now = Date.now();
+      if (now - lastBurstTime < BURST_COOLDOWN_MS) return;
+      lastBurstTime = now;
+
+      const x = e.clientX / canvas.width;
+      const y = 1 - e.clientY / canvas.height;
+
+      // One color per burst — all 8 arms share the same hue
+      // so the burst reads as a single intentional color event
+      const c = getNextColor();
+      const boost = BURST_COLOR_BOOST;
+
+      for (let i = 0; i < BURST_ARMS; i++) {
+        // Base angle: evenly spaced around 360°
+        const baseAngle = (i / BURST_ARMS) * Math.PI * 2;
+        // Organic jitter: each arm deviates slightly from perfect symmetry
+        const angle = baseAngle + (Math.random() - 0.5) * JITTER_RAD;
+
+        const fx = Math.cos(angle) * BURST_FORCE;
+        const fy = Math.sin(angle) * BURST_FORCE;
+
+        splatR(
+          x,
+          y,
+          fx,
+          fy,
+          { r: c.r * boost, g: c.g * boost, b: c.b * boost },
+          BURST_RADIUS_MULT,
+        );
+      }
+    };
+
+    // ══════════════════════════════════════════════════════════════
+    //  SCROLL EFFECT v2 — "Prismatic Vortex"
+    //
+    //  3 orbital splats at 120° apart (triangular, never symmetric)
+    //  + 1 slow center bloom on fast scrolls for depth.
+    //  Each orbit arm has its own radius: inner / mid / outer
+    //  so the aurora has physical depth, not a flat ring.
+    // ══════════════════════════════════════════════════════════════
+    let lastScrollY = window.scrollY;
+    let scrollPhase = 0;
+    let scrollMomentum = 0;
+
+    const SCROLL_BASE_R = 0.24; // base orbital radius (larger = wider aurora)
 
     const onScroll = () => {
       const currentY = window.scrollY;
@@ -660,35 +774,47 @@ export default function SplashCursor() {
       const speed = Math.abs(rawDelta);
       if (speed < 0.5) return;
 
-      // Smooth momentum — fast scroll builds up, then decays
-      scrollMomentum = Math.min(scrollMomentum + speed * 0.04, 1.0);
+      scrollMomentum = Math.min(scrollMomentum + speed * 0.05, 1.0);
+      scrollPhase += speed * 0.009; // faster rotation = more dynamic
 
-      // Advance orbital phase — each scroll nudges the rotation
-      scrollPhase += speed * 0.006;
+      // Rich values: noticeably more vivid than before
+      const intensity = Math.min(speed * 1.2, 300); // higher cap
+      const colorScale = Math.min(speed * 0.016, 0.38); // richer color
+      const dir = rawDelta > 0 ? 1 : -1;
 
-      // ── Two orbital aurora splats ──────────────────────────
-      // They sit at opposing positions around screen center,
-      // creating a balanced bloom (like Antigravity's two-orb aurora).
-      const intensity = Math.min(speed * 0.9, 220); // force — gentle cap
-      const colorScale = Math.min(speed * 0.011, 0.28); // subtle color intensity
-
-      for (let i = 0; i < 2; i++) {
-        const angle = scrollPhase + i * Math.PI; // 180° apart
-        const cx = 0.5 + Math.cos(angle) * SCROLL_ORBITAL_RADIUS;
-        const cy = 0.5 + Math.sin(angle) * SCROLL_ORBITAL_RADIUS * 0.55; // elliptical
-
-        // Force rotates tangentially — creates a slow spin, not a push
-        const forceAngle = angle + Math.PI / 2;
-        const fx = Math.cos(forceAngle) * intensity * (rawDelta > 0 ? 1 : -1);
-        const fy = Math.sin(forceAngle) * intensity * (rawDelta > 0 ? 1 : -1);
-
+      // ── 3 orbital splats (120° / 240° / 360°) ──────────────
+      // Each at a different orbital radius → depth layering
+      const radii = [SCROLL_BASE_R * 0.7, SCROLL_BASE_R, SCROLL_BASE_R * 1.3];
+      for (let i = 0; i < 3; i++) {
+        const angle = scrollPhase + (i / 3) * Math.PI * 2;
+        const r = radii[i];
+        const cx = 0.5 + Math.cos(angle) * r;
+        const cy = 0.5 + Math.sin(angle) * r * 0.5; // elliptical
+        const forceAngle = angle + Math.PI / 2; // tangential
+        const fx = Math.cos(forceAngle) * intensity * dir;
+        const fy = Math.sin(forceAngle) * intensity * dir * 1.3; // bias vertical
         const c = getNextColor();
         splat(
-          Math.max(0.05, Math.min(0.95, cx)),
-          Math.max(0.05, Math.min(0.95, cy)),
+          Math.max(0.04, Math.min(0.96, cx)),
+          Math.max(0.04, Math.min(0.96, cy)),
           fx,
           fy,
           { r: c.r * colorScale, g: c.g * colorScale, b: c.b * colorScale },
+        );
+      }
+
+      // ── Center bloom: slow radial breath from the page core ─
+      // Fires only on fast scrolls (speed > 12) for visual depth
+      if (speed > 12) {
+        const bloomScale = Math.min(speed * 0.007, 0.18);
+        const c = getNextColor();
+        splatR(
+          0.5,
+          0.5,
+          (Math.random() - 0.5) * 80 * dir,
+          (Math.random() - 0.5) * 80,
+          { r: c.r * bloomScale, g: c.g * bloomScale, b: c.b * bloomScale },
+          3.5, // large soft radius — creates the central glow
         );
       }
     };
@@ -825,8 +951,33 @@ export default function SplashCursor() {
       }
     }
 
+    // ── CSS cursor helpers ────────────────────────────────────
+    // The ring is INVISIBLE by default (opacity 0).
+    // It only appears when hovering over interactive elements.
+    const setCursorHidden = () => {
+      const el = cursorRef.current;
+      if (!el) return;
+      el.style.opacity = "0";
+    };
+
+    const setCursorHover = () => {
+      const el = cursorRef.current;
+      if (!el) return;
+      // Animation (cursor-chroma + cursor-pulse) is always running via CSS class.
+      // We only need to set opacity — the visual is handled by keyframes.
+      el.style.opacity = "1";
+    };
+
     // ── Events ───────────────────────────────────────────────
     const onMouseMove = (e) => {
+      // Move the CSS cursor ring — direct DOM, no React re-render
+      const el = cursorRef.current;
+      if (el) {
+        el.style.left = e.clientX + "px";
+        el.style.top = e.clientY + "px";
+      }
+
+      // WebGL splat
       const p = pointers[0];
       if (!p.down) {
         p.down = true;
@@ -844,6 +995,13 @@ export default function SplashCursor() {
       ]);
     };
 
+    const onMouseOver = (e) => {
+      if (e.target.closest(INTERACTIVE_SELECTOR)) setCursorHover();
+    };
+    const onMouseOut = (e) => {
+      if (e.target.closest(INTERACTIVE_SELECTOR)) setCursorHidden();
+    };
+
     const onTouchMove = (e) => {
       e.preventDefault();
       Array.from(e.targetTouches).forEach((touch, i) => {
@@ -859,6 +1017,9 @@ export default function SplashCursor() {
     };
 
     window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseover", onMouseOver);
+    window.addEventListener("mouseout", onMouseOut);
+    window.addEventListener("mousedown", onMouseDown);
     window.addEventListener("touchmove", onTouchMove, { passive: false });
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -876,10 +1037,8 @@ export default function SplashCursor() {
       const dt = Math.min((now - lastTime) / 1000, 0.016);
       lastTime = now;
 
-      // Decay scroll momentum — the aurora shimmer fades naturally
       scrollMomentum *= 0.92;
 
-      // Normal cursor splats — always active (removed isScrolling gate)
       pointers.forEach((p) => {
         if (p.moved) {
           p.moved = false;
@@ -901,7 +1060,11 @@ export default function SplashCursor() {
 
     return () => {
       isActive = false;
+      document.head.removeChild(styleEl); // restore native cursor
       window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseover", onMouseOver);
+      window.removeEventListener("mouseout", onMouseOut);
+      window.removeEventListener("mousedown", onMouseDown);
       window.removeEventListener("touchmove", onTouchMove);
       window.removeEventListener("resize", resizeCanvas);
       window.removeEventListener("scroll", onScroll);
@@ -924,6 +1087,30 @@ export default function SplashCursor() {
         ref={canvasRef}
         id="fluid"
         style={{ width: "100vw", height: "100vh", display: "block" }}
+      />
+
+      {/* CSS cursor — chromatic spinning dot, invisible until hovering interactive */}
+      <div
+        ref={cursorRef}
+        className="fluid-cursor"
+        style={{
+          position: "fixed",
+          pointerEvents: "none",
+          zIndex: 10000,
+          width: "20px",
+          height: "20px",
+          borderRadius: "50%",
+          border: "none",
+          // base gradient overridden by .fluid-cursor conic-gradient
+          background:
+            "conic-gradient(#00e5ff, #7c1aff, #ff1493, #ffb700, #00e5ff)",
+          opacity: 0,
+          transform: "translate(-50%, -50%)",
+          transition: "opacity 0.18s ease",
+          left: "-100px",
+          top: "-100px",
+          willChange: "left, top, opacity",
+        }}
       />
     </div>
   );
