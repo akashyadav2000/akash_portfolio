@@ -109,50 +109,228 @@
 //   );
 // }
 
+// import React, { useState, useRef } from "react";
+// import {
+//   MdArrowForwardIos,
+//   MdArrowDropDown,
+//   MdArrowDropUp,
+// } from "react-icons/md";
+// import { motion, useInView } from "framer-motion";
+// import { skills } from "../data/skillsData";
+// import { useTheme } from "../context/ThemeContext";
+
+// const CORE = skills.slice(0, 9);
+// const EXTRAS = skills.slice(9);
+
+// function SkillCard({ skill, i, inView, isDark }) {
+//   const ref = useRef(null);
+//   const handleMove = (e) => {
+//     const el = ref.current;
+//     if (!el) return;
+//     const rect = el.getBoundingClientRect();
+//     const x = (e.clientX - rect.left) / rect.width - 0.5;
+//     const y = (e.clientY - rect.top) / rect.height - 0.5;
+//     el.style.transform = `perspective(400px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.04)`;
+//   };
+//   const handleLeave = () => {
+//     if (ref.current)
+//       ref.current.style.transform =
+//         "perspective(400px) rotateY(0) rotateX(0) scale(1)";
+//   };
+
+//   return (
+//     <motion.div
+//       initial={{ opacity: 0, y: 30, rotateX: 20 }}
+//       animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
+//       transition={{ delay: i * 0.05, duration: 0.5, ease: "easeOut" }}
+//     >
+//       <div
+//         ref={ref}
+//         onMouseMove={handleMove}
+//         onMouseLeave={handleLeave}
+//         className={`tilt-card flex items-center justify-between gap-4 px-4 py-[9px] rounded-lg border transition-all duration-300
+//           ${
+//             isDark
+//               ? "glass-card bg-white/5 border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(0,240,252,0.1)]"
+//               : `bg-gradient-to-bl ${skill.bgGradient} border-gray-200/80 hover:shadow-md`
+//           }`}
+//       >
+//         <div className="flex items-center gap-3">
+//           <div className="flex-shrink-0">
+//             {skill.isImage ? (
+//               <img
+//                 src={skill.icon}
+//                 alt={skill.name}
+//                 loading="lazy"
+//                 className="w-[30px] h-[30px] xl:w-[34px] xl:h-[34px]"
+//               />
+//             ) : (
+//               <skill.icon
+//                 className={`w-[30px] h-[30px] xl:w-[34px] xl:h-[34px] ${skill.iconColor}`}
+//                 aria-hidden="true"
+//               />
+//             )}
+//           </div>
+//           <div className="text-left">
+//             <h4
+//               className={`font-semibold text-[13px] xl:text-[15px] ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-200") : skill.textColor}`}
+//             >
+//               {skill.name}
+//             </h4>
+//             <p
+//               className={`text-[12px] xl:text-[14px] font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
+//             >
+//               {skill.desc}
+//             </p>
+//           </div>
+//         </div>
+//         <MdArrowForwardIos
+//           className={`text-[13px] xl:text-[15px] flex-shrink-0 ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-400") : skill.textColor}`}
+//           aria-hidden="true"
+//         />
+//       </div>
+//     </motion.div>
+//   );
+// }
+
+// export default function Skills() {
+//   const [showMore, setShowMore] = useState(false);
+//   const { isDark } = useTheme();
+//   const ref = useRef(null);
+//   const inView = useInView(ref, { once: true, margin: "-80px" });
+
+//   return (
+//     <section
+//       id="skills"
+//       ref={ref}
+//       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
+//     >
+//       <motion.h2
+//         initial={{ opacity: 0, y: 30 }}
+//         animate={inView ? { opacity: 1, y: 0 } : {}}
+//         transition={{ duration: 0.6 }}
+//         className={`2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold mb-6 xl:mb-[3%] text-center
+//           ${isDark ? "text-white" : "text-gray-800"}`}
+//       >
+//         My{" "}
+//         <span
+//           className={isDark ? "text-pink-400 neon-text-pink" : "text-pink-500"}
+//         >
+//           Skills
+//         </span>
+//       </motion.h2>
+
+//       {/* Desktop grid */}
+//       <div
+//         className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4"
+//         style={{ perspective: "800px" }}
+//       >
+//         {skills.map((skill, i) => (
+//           <SkillCard
+//             key={i}
+//             skill={skill}
+//             i={i}
+//             inView={inView}
+//             isDark={isDark}
+//           />
+//         ))}
+//       </div>
+
+//       {/* Mobile accordion */}
+//       <div className="md:hidden flex flex-col gap-3">
+//         {CORE.map((skill, i) => (
+//           <SkillCard
+//             key={i}
+//             skill={skill}
+//             i={i}
+//             inView={inView}
+//             isDark={isDark}
+//           />
+//         ))}
+//         {showMore && (
+//           <div className="flex flex-col gap-3">
+//             {EXTRAS.map((skill, i) => (
+//               <SkillCard
+//                 key={i}
+//                 skill={skill}
+//                 i={i + 9}
+//                 inView={inView}
+//                 isDark={isDark}
+//               />
+//             ))}
+//           </div>
+//         )}
+//         <button
+//           onClick={() => setShowMore((p) => !p)}
+//           className={`mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-lg border font-semibold text-[14px] transition-colors duration-200
+//             ${
+//               isDark
+//                 ? "border-pink-400/50 text-pink-400 bg-transparent hover:bg-pink-400/10"
+//                 : "border-pink-300 text-pink-500 bg-white/70 hover:bg-pink-50"
+//             }`}
+//         >
+//           {showMore ? (
+//             <>
+//               Show Less <MdArrowDropUp className="text-[20px]" />
+//             </>
+//           ) : (
+//             <>
+//               Show {EXTRAS.length} More Skills{" "}
+//               <MdArrowDropDown className="text-[20px]" />
+//             </>
+//           )}
+//         </button>
+//       </div>
+//     </section>
+//   );
+// }
+
 import React, { useState, useRef } from "react";
 import {
   MdArrowForwardIos,
   MdArrowDropDown,
   MdArrowDropUp,
 } from "react-icons/md";
-import { motion, useInView } from "framer-motion";
+import { motion, useInView } from "motion/react";
 import { skills } from "../data/skillsData";
 import { useTheme } from "../context/ThemeContext";
 
-const CORE = skills.slice(0, 9);
-const EXTRAS = skills.slice(9);
+const CORE = skills.slice(0, 9),
+  EXTRA = skills.slice(9);
 
 function SkillCard({ skill, i, inView, isDark }) {
-  const ref = useRef(null);
-  const handleMove = (e) => {
-    const el = ref.current;
+  const r = useRef(null);
+  const move = (e) => {
+    const el = r.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(400px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.04)`;
+    const b = el.getBoundingClientRect();
+    const x = (e.clientX - b.left) / b.width - 0.5;
+    const y = (e.clientY - b.top) / b.height - 0.5;
+    el.style.transform = `perspective(500px) rotateY(${x * 9}deg) rotateX(${-y * 9}deg) scale(1.04)`;
+    el.style.transition = "transform 0.05s";
   };
-  const handleLeave = () => {
-    if (ref.current)
-      ref.current.style.transform =
-        "perspective(400px) rotateY(0) rotateX(0) scale(1)";
+  const leave = () => {
+    if (r.current) {
+      r.current.style.transform = "";
+      r.current.style.transition = "transform 0.5s ease";
+    }
   };
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30, rotateX: 20 }}
+      initial={{ opacity: 0, y: 24, rotateX: 15 }}
       animate={inView ? { opacity: 1, y: 0, rotateX: 0 } : {}}
-      transition={{ delay: i * 0.05, duration: 0.5, ease: "easeOut" }}
+      transition={{ delay: i * 0.04, duration: 0.5 }}
     >
       <div
-        ref={ref}
-        onMouseMove={handleMove}
-        onMouseLeave={handleLeave}
-        className={`tilt-card flex items-center justify-between gap-4 px-4 py-[9px] rounded-lg border transition-all duration-300
+        ref={r}
+        onMouseMove={move}
+        onMouseLeave={leave}
+        className={`tilt flex items-center justify-between gap-4 px-4 py-[10px] rounded-xl border transition-all duration-300
           ${
             isDark
-              ? "glass-card bg-white/5 border-white/10 hover:border-cyan-400/50 hover:shadow-[0_0_20px_rgba(0,240,252,0.1)]"
-              : `bg-gradient-to-bl ${skill.bgGradient} border-gray-200/80 hover:shadow-md`
+              ? "bg-white/[0.04] border-white/10 hover:border-pink-400/50 hover:shadow-[0_0_20px_rgba(244,114,182,0.1)]"
+              : `bg-gradient-to-bl ${skill.bgGradient} border-gray-200/70 hover:shadow-md`
           }`}
       >
         <div className="flex items-center gap-3">
@@ -162,30 +340,31 @@ function SkillCard({ skill, i, inView, isDark }) {
                 src={skill.icon}
                 alt={skill.name}
                 loading="lazy"
-                className="w-[30px] h-[30px] xl:w-[34px] xl:h-[34px]"
+                className="w-[30px] h-[30px] xl:w-[33px] xl:h-[33px]"
               />
             ) : (
               <skill.icon
-                className={`w-[30px] h-[30px] xl:w-[34px] xl:h-[34px] ${skill.iconColor}`}
+                className={`w-[30px] h-[30px] xl:w-[33px] xl:h-[33px] ${skill.iconColor}`}
                 aria-hidden="true"
               />
             )}
           </div>
           <div className="text-left">
             <h4
-              className={`font-semibold text-[13px] xl:text-[15px] ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-200") : skill.textColor}`}
+              className={`font-[700] text-[13px] xl:text-[14px] tracking-tight
+              ${isDark ? (skill.textColor === "text-black" || skill.textColor === "text-gray-800" ? "text-gray-200" : skill.textColor) : skill.textColor}`}
             >
               {skill.name}
             </h4>
             <p
-              className={`text-[12px] xl:text-[14px] font-medium ${isDark ? "text-gray-400" : "text-gray-600"}`}
+              className={`text-[11px] xl:text-[12px] font-[400] ${isDark ? "text-gray-500" : "text-gray-500"}`}
             >
               {skill.desc}
             </p>
           </div>
         </div>
         <MdArrowForwardIos
-          className={`text-[13px] xl:text-[15px] flex-shrink-0 ${isDark ? skill.textColor.replace("text-gray-800", "text-gray-400") : skill.textColor}`}
+          className={`text-[12px] flex-shrink-0 ${isDark ? "text-pink-400" : "text-gray-400"}`}
           aria-hidden="true"
         />
       </div>
@@ -194,7 +373,7 @@ function SkillCard({ skill, i, inView, isDark }) {
 }
 
 export default function Skills() {
-  const [showMore, setShowMore] = useState(false);
+  const [more, setMore] = useState(false);
   const { isDark } = useTheme();
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
@@ -204,55 +383,49 @@ export default function Skills() {
       id="skills"
       ref={ref}
       className="min-h-fit xl:min-h-[calc(100dvh-55px)] flex flex-col justify-center relative 2xl:px-[11%] xl:px-[10%] lg:px-[8%] px-[5%] py-8 xl:py-[2%]"
+      style={{
+        background: isDark
+          ? "linear-gradient(135deg,#110510 0%,#1a0820 50%,#0d0610 100%)"
+          : undefined,
+      }}
     >
+      {!isDark && (
+        <div className="absolute inset-0 -z-10">
+          <div className="w-full h-full bg-gradient-to-br from-[#ffc5c5]/40 via-[#ffbbed]/40 to-[#cfcfcf]/30" />
+        </div>
+      )}
+
       <motion.h2
-        initial={{ opacity: 0, y: 30 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className={`2xl:text-[34px] xl:text-[32px] lg:text-[28px] text-[24px] font-semibold mb-6 xl:mb-[3%] text-center
-          ${isDark ? "text-white" : "text-gray-800"}`}
+        className={`2xl:text-[34px] xl:text-[30px] lg:text-[26px] text-[22px] font-[800] mb-6 xl:mb-[3%] text-center tracking-tight
+          ${isDark ? "text-white" : "text-gray-900"}`}
       >
         My{" "}
-        <span
-          className={isDark ? "text-pink-400 neon-text-pink" : "text-pink-500"}
-        >
+        <span className={isDark ? "text-pink-400" : "text-pink-500"}>
           Skills
         </span>
       </motion.h2>
 
-      {/* Desktop grid */}
       <div
-        className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-7 xl:gap-5 gap-4"
-        style={{ perspective: "800px" }}
+        className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 2xl:gap-5 xl:gap-4 gap-3"
+        style={{ perspective: "700px" }}
       >
-        {skills.map((skill, i) => (
-          <SkillCard
-            key={i}
-            skill={skill}
-            i={i}
-            inView={inView}
-            isDark={isDark}
-          />
+        {skills.map((s, i) => (
+          <SkillCard key={i} skill={s} i={i} inView={inView} isDark={isDark} />
         ))}
       </div>
-
-      {/* Mobile accordion */}
       <div className="md:hidden flex flex-col gap-3">
-        {CORE.map((skill, i) => (
-          <SkillCard
-            key={i}
-            skill={skill}
-            i={i}
-            inView={inView}
-            isDark={isDark}
-          />
+        {CORE.map((s, i) => (
+          <SkillCard key={i} skill={s} i={i} inView={inView} isDark={isDark} />
         ))}
-        {showMore && (
+        {more && (
           <div className="flex flex-col gap-3">
-            {EXTRAS.map((skill, i) => (
+            {EXTRA.map((s, i) => (
               <SkillCard
                 key={i}
-                skill={skill}
+                skill={s}
                 i={i + 9}
                 inView={inView}
                 isDark={isDark}
@@ -261,21 +434,17 @@ export default function Skills() {
           </div>
         )}
         <button
-          onClick={() => setShowMore((p) => !p)}
-          className={`mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-lg border font-semibold text-[14px] transition-colors duration-200
-            ${
-              isDark
-                ? "border-pink-400/50 text-pink-400 bg-transparent hover:bg-pink-400/10"
-                : "border-pink-300 text-pink-500 bg-white/70 hover:bg-pink-50"
-            }`}
+          onClick={() => setMore((p) => !p)}
+          className={`mt-2 flex items-center justify-center gap-1 w-full py-2 rounded-xl border font-[700] text-[13px] tracking-wide transition-colors
+            ${isDark ? "border-pink-400/50 text-pink-400 hover:bg-pink-400/10" : "border-pink-300 text-pink-500 bg-white/70 hover:bg-pink-50"}`}
         >
-          {showMore ? (
+          {more ? (
             <>
               Show Less <MdArrowDropUp className="text-[20px]" />
             </>
           ) : (
             <>
-              Show {EXTRAS.length} More Skills{" "}
+              Show {EXTRA.length} More Skills{" "}
               <MdArrowDropDown className="text-[20px]" />
             </>
           )}
